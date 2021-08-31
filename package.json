@@ -1,0 +1,29 @@
+{
+  "name": "advancesoftwaredev",
+  "version": "1.0.0",
+  "description": "Fri 1pm Group 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently -p \"[{name}]\" -n \"node,react\" -c \"bgGreen.bold,bgBlue.bold\"  \"npm run backend node\" \"npm start frontend react\"",
+    "start": "npm start --prefix frontend",
+    "frontend": "npm start --prefix frontend",
+    "backend": "npm run node --prefix backend",
+    "build": "npm run build --prefix frontend",
+    "frontend-install": "cd frontend && npm install",
+    "backend-install": "cd backend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelorgexia/advancesoftwaredev.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samuelorgexia/advancesoftwaredev/issues"
+  },
+  "homepage": "https://github.com/samuelorgexia/advancesoftwaredev#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
