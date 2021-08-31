@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
-
+import {  } from "@headlessui/react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import routes from './routes';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+     <div className="">
+       <Router>
+         <ul>
+           <li><a><Link to="login">Login</Link></a></li>
+           <li><a><Link to="/user-manage">Manage</Link></a></li>
+         </ul>
+         <routes/>
+       </Router>
+     </div>
     </div>
   );
 }
