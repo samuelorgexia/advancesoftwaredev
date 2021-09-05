@@ -11,7 +11,7 @@ const routes = [
     title: "Login",
     pathname: "/login",
     component: login,
-    layout: "auth",
+    layout: "authLayout",
   },
   {
     title: "User Management",

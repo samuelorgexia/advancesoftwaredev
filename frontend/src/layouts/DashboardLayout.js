@@ -56,6 +56,7 @@ export default function DashboardLayout(props) {
   return (
     <div>
       <DashboardNav
+        {...props}
         user={user}
         navigation={navigation}
         userNavigation={userNavigation}
