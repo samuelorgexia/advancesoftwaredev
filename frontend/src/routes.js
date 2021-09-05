@@ -1,10 +1,33 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import login from "./views/users/login";
+
 import userManagement from "./views/users/user-management";
 import property from "./views/properties/property";
+import PropertyListings from "./views/properties/PropertyListings.js";
 
-function routes() {
+const routes = [
+  {
+    title: "Login",
+    pathname: "/login",
+    component: login,
+    layout: "auth",
+  },
+  {
+    title: "User Management",
+    pathname: "/user-manage",
+    component: userManagement,
+    layout: "dashboardLayout",
+  },
+  {
+    title: "Properties",
+    pathname: "/properties",
+    component: PropertyListings,
+    layout: "dashboardLayout",
+  },
+];
+
+/*function routes() {
   return (
     <div>
       <Switch>
@@ -13,5 +36,6 @@ function routes() {
       </Switch>
     </div>
   );
-}
+}*/
+
 export default routes;
