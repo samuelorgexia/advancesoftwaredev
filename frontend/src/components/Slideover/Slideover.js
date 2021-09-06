@@ -3,8 +3,10 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 
-export default function Example() {
-  const [open, setOpen] = useState(true);
+export default function Slideover(props) {
+  //const [open, setOpen] = useState(true);
+
+  const { open, setOpen, title } = props;
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -59,18 +61,11 @@ export default function Example() {
                 <div className="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
                   <div className="px-4 sm:px-6">
                     <Dialog.Title className="text-lg font-medium text-gray-900">
-                      Panel title
+                      {title}
                     </Dialog.Title>
                   </div>
                   <div className="mt-6 relative flex-1 px-4 sm:px-6">
-                    {/* Replace with your content */}
-                    <div className="absolute inset-0 px-4 sm:px-6">
-                      <div
-                        className="h-full border-2 border-dashed border-gray-200"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    {/* /End replace */}
+                    {props.children}
                   </div>
                 </div>
               </div>

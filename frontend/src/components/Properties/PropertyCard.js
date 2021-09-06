@@ -6,8 +6,13 @@ import { ReactComponent as CarIcon } from "../../assets/icons/car.svg";
 
 import Button from "../Buttons/Button.js";
 
-
 export default function PropertyCard(props) {
+  const { onPropertyPreview } = props;
+
+  const handlePropertyPreview = () => {
+    onPropertyPreview(true);
+  };
+
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-md">
       <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg" />
@@ -23,7 +28,9 @@ export default function PropertyCard(props) {
           <CarIcon />
         </div>
         <div className="py-4">
-          <Button colour="red">View Auction</Button>
+          <Button colour="red" onClick={handlePropertyPreview}>
+            View Property
+          </Button>
         </div>
         <div className="text-center text-xs">Countdown to auction</div>
       </div>
