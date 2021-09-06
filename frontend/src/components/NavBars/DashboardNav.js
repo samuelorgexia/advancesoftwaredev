@@ -3,8 +3,10 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
+import { HomeIcon } from "@heroicons/react/solid";
+
 export default function DashboardNav(props) {
-  const { user, navigation, userNavigation } = props;
+  const { user, navigation, userNavigation, history } = props;
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -14,11 +16,14 @@ export default function DashboardNav(props) {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <img
-                    className="h-8 w-8"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                    alt="Workflow"
-                  />
+                  <div
+                    className="flex items-center"
+                    style={{ color: "white", cursor: "pointer" }}
+                    onClick={() => history.push("/")}
+                  >
+                    <HomeIcon className="h-8 w-8" />
+                    <div className="text-2xl pl-2">auctionify</div>
+                  </div>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
