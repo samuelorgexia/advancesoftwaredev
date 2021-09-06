@@ -40,7 +40,8 @@ function App() {
             .map((route) => route.pathname)}
           render={(rest) => <AuthLayout {...rest} />}
         />
-        <Redirect from="/" to="/properties" />
+        <Redirect from="/properties" to="/properties/all" />
+        <Redirect from="/" to="/properties/all" />
       </Switch>
     </Router>
   );

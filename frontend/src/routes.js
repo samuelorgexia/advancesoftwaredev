@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import login from "./views/users/login";
 
 import userManagement from "./views/users/user-management";
-import property from "./views/properties/property";
-import PropertyListings from "./views/properties/PropertyListings.js";
+
+import Property from "./views/Properties/Property.js";
+import PropertyListings from "./views/Properties/PropertyListings.js";
 
 const routes = [
   {
@@ -21,8 +22,14 @@ const routes = [
   },
   {
     title: "Properties",
-    pathname: "/properties",
+    pathname: "/properties/:mode",
     component: PropertyListings,
+    layout: "dashboardLayout",
+  },
+  {
+    title: "View Property",
+    pathname: "/property/:id",
+    component: Property,
     layout: "dashboardLayout",
   },
 ];
