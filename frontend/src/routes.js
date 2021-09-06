@@ -22,13 +22,13 @@ const routes = [
   },
   {
     title: "Properties",
-    pathname: "/properties",
+    pathname: "/properties/:mode",
     component: PropertyListings,
     layout: "dashboardLayout",
   },
   {
     title: "View Property",
-    pathname: "/properties/:id",
+    pathname: "/property/:id",
     component: Property,
     layout: "dashboardLayout",
   },

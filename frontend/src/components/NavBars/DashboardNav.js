@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import { HomeIcon } from "@heroicons/react/solid";
+import { NavLink } from "react-router-dom";
 
 export default function DashboardNav(props) {
   const { user, navigation, userNavigation, history } = props;
@@ -27,32 +28,31 @@ export default function DashboardNav(props) {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
+                    {navigation.map((item, index) => (
+                      <NavLink
+                        key={index}
+                        to={item.path}
                         className={`${
-                          item.current
+                          item.path === window.location.pathname
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white"
                         } px-3 py-2 rounded-md text-sm font-medium`}
-                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
               </div>
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
-                  <button
+                  {/* <button
                     type="button"
                     className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </button> */}
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
@@ -112,19 +112,18 @@ export default function DashboardNav(props) {
 
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
+              {navigation.map((item, index) => (
+                <NavLink
+                  key={index}
+                  to={item.path}
                   className={`${
                     item.current
                       ? "bg-gray-900 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white"
                   } block px-3 py-2 rounded-md text-base font-medium`}
-                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </a>
+                </NavLink>
               ))}
             </div>
             <div className="pt-4 pb-3 border-t border-gray-700">

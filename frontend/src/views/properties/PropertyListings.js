@@ -5,6 +5,19 @@ import Slideover from "../../components/Slideover/Slideover.js";
 import Property from "./Property.js";
 
 export default function PropertyListings(props) {
+  const { setOverrideTitle, match } = props;
+
+  useEffect(() => {
+    if (["all", "past", "upcoming", "live"].includes(match.params.mode)) {
+      setOverrideTitle(`${match.params.mode} properties`);
+    }
+
+    return () => {
+      //reset override title
+      setOverrideTitle(null);
+    };
+  }, [match.params.mode]);
+
   const [propertyPreview, setPropertyPreview] = useState(false);
 
   const handlePropertyPreview = (propertyData) => {
