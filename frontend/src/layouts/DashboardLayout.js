@@ -43,14 +43,20 @@ export default function DashboardLayout(props) {
     });
   };
 
-  const getActiveRouteTitle = (routes) => {
+  const getActiveRoute = (routes) => {
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].pathname === window.location.pathname) {
-        return routes[i].title;
+        return routes[i];
       }
     }
 
-    return "Default Title";
+    return null;
+  };
+
+  const getActiveRouteTitle = (routes) => {
+    const route = getActiveRoute(routes);
+
+    return route.title || "Default Title";
   };
 
   return (
