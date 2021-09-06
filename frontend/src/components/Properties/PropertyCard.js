@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import { ReactComponent as BedIcon } from "../../assets/icons/bed.svg";
 import { ReactComponent as BathIcon } from "../../assets/icons/bath.svg";
 import { ReactComponent as CarIcon } from "../../assets/icons/car.svg";
+
 import Button from "../Buttons/Button.js";
+
 
 export default function PropertyCard(props) {
   return (
