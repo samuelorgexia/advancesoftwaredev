@@ -1,8 +1,12 @@
 # How to install
 
-1. run "npm install"
-2. run "npm run backend-install"
-3. run "npm run frontend-install
+Mother of all installers
+- run "npm run install-all"
+
+Individual install scripts
+1. run "npm install" (root package, mainly for concurrently package).
+2. run "npm run backend-install" (backend node)
+3. run "npm run frontend-install" (frontend react)
 
 # How to run
 
