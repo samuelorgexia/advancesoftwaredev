@@ -24,15 +24,36 @@ export default function PropertyListings(props) {
     setPropertyPreview(true);
   };
 
+  const properties = [
+    {
+      id: 1,
+      title: "$1,500,000 starting price!",
+      address: "304 Bowden street",
+      suburb: "Meadowbank",
+      state: "NSW",
+      postcode: "2114",
+      description:
+        "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+      features: {
+        bed: 2,
+        bath: 1,
+        car: 1,
+      },
+    },
+  ];
+
   return (
     <>
-      <Properties onPropertyPreview={handlePropertyPreview} />
+      <Properties
+        onPropertyPreview={handlePropertyPreview}
+        properties={properties}
+      />
       <Slideover
         open={propertyPreview}
         setOpen={setPropertyPreview}
         title="Property Preview"
       >
-        <Property {...props} />
+        <Property {...props} preview={true} />
       </Slideover>
     </>
   );
