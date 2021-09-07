@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import login from "./views/users/login";
 import signup  from "./views/users/signup";
 import userManagement from "./views/users/user-management";
-import property from "./views/properties/property";
-import PropertyListings from "./views/properties/PropertyListings.js";
+
+import Property from "./views/properties/property";
+import PropertyListings from "./views/properties/PropertyListings";
 
 const routes = [
   {
@@ -12,6 +13,9 @@ const routes = [
     pathname: "/login",
     component: login,
     layout: "dashboardLayout", //auth
+    /*
+    I change to dashboard layout as tempoary as this is not going to be functional for assignment 1
+    */
   },
   {
     title: "User Settings",
@@ -21,7 +25,7 @@ const routes = [
   },
   {
     title: "Properties",
-    pathname: "/properties",
+    pathname: "/properties/:mode",
     component: PropertyListings,
     layout: "dashboardLayout",
   },
@@ -29,6 +33,12 @@ const routes = [
   pathname:"/signup",
   component:signup,
     layout:"dashboardLayout"
+},
+  {
+    title: "View Property",
+    pathname: "/property/:id",
+    component: Property,
+    layout: "dashboardLayout",
   },
 ];
 

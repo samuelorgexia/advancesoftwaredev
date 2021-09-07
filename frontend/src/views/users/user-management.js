@@ -15,18 +15,32 @@ import BudgetPopup from './budget-popup';
    
     return(
        
-        <div class="flex items-stretch">
-             
+        <div >
+
+          <div>
              <ul>
-        <li><button  onClick={()=>setpassPopup(true)} class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Change Password</button></li>
-        <li><button onClick={()=>setdePopup(true)}   class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Change Details</button></li>
-        <li ><button onClick={()=>setbudPopup(true)}  class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Set Budget</button></li>
+        <li class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><button  onClick={()=>setpassPopup(true)} >Change Password</button></li>
+        <li class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><button onClick={()=>setdePopup(true)}  >Change Details</button></li>
+        <li class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><button onClick={()=>setbudPopup(true)}  >Set Budget</button></li>
     </ul>
+    </div>
+
+
+
+
+
+
+    <div>
          <PasswordPopup trigger={passpopup} setTrigger={setpassPopup}>
          </PasswordPopup>
          <DetailsPopup trigger={dePopup} setTrigger={setdePopup}></DetailsPopup>
          <BudgetPopup  trigger={budPopup}setTrigger={setbudPopup}>
          </BudgetPopup>
+
+         </div>
+
+
+
         </div>
     )
 }
