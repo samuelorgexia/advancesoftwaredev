@@ -6,6 +6,11 @@ export default function Property(props) {
   // gets the preview variable from props
   const { preview } = props;
 
+  if (preview) {
+    return <div>show in preview</div>;
+  }
+
+  //shows when not preview
   return (
     <div className="prose">
       <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg" />

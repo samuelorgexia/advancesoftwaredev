@@ -1,0 +1,122 @@
+{
+  "1": {
+    "id": 1,
+    "title": "$1,500,000 starting price!",
+    "address": "304 Bowden street",
+    "suburb": "Meadowbank",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "auctionLive": false,
+    "auctionTime": null,
+    "auctionCompleted": {
+      "date": 1631171986648
+    }
+  },
+
+  "2": {
+    "id": 1,
+    "title": "$1,500,000 starting price!",
+    "address": "304 Bowden street",
+    "suburb": "Meadowbank",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "coords": {
+      "long": null,
+      "lat": null
+    },
+    "auctionLive": true,
+    "auctionTime": null
+  },
+  "3": {
+    "id": 1,
+    "title": "$1,500,000 starting price!",
+    "address": "304 Bowden street",
+    "suburb": "Meadowbank",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "coords": {
+      "long": null,
+      "lat": null
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  },
+  "4": {
+    "id": 1,
+    "title": "$1,500,000 starting price!",
+    "address": "304 Bowden street",
+    "suburb": "Meadowbank",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "coords": {
+      "long": null,
+      "lat": null
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  },
+  "5": {
+    "id": 1,
+    "title": "$1,500,000 starting price!",
+    "address": "304 Bowden street",
+    "suburb": "Meadowbank",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "coords": {
+      "long": null,
+      "lat": null
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  },
+  "6": {
+    "id": 1,
+    "title": "$1,500,000 starting price!",
+    "address": "304 Bowden street",
+    "suburb": "Meadowbank",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "coords": {
+      "long": null,
+      "lat": null
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  }
+}
