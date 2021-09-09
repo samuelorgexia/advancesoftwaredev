@@ -5,6 +5,7 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import { HomeIcon } from "@heroicons/react/solid";
 import { NavLink } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function DashboardNav(props) {
   const { user, navigation, userNavigation, history } = props;
@@ -46,14 +47,6 @@ export default function DashboardNav(props) {
               </div>
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
-                  {/* <button
-                    type="button"
-                    className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button> */}
-
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
                     <div>
@@ -109,7 +102,9 @@ export default function DashboardNav(props) {
               </div>
             </div>
           </div>
-
+          <div className="max-w-7xl mx-auto">
+            <SearchBar/>
+          </div>
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navigation.map((item, index) => (
