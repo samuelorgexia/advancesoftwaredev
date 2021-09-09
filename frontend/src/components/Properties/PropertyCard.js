@@ -11,7 +11,7 @@ export default function PropertyCard(props) {
   const { onPropertyPreview, property, currentTime } = props;
 
   const handlePropertyPreview = () => {
-    onPropertyPreview(true);
+    onPropertyPreview(property.id);
   };
 
   const goToAuction = () => {

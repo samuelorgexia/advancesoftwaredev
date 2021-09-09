@@ -12,6 +12,8 @@ export default function PropertyListings(props) {
   const { setOverrideTitle, match } = props;
 
   const [propertyPreview, setPropertyPreview] = useState(false);
+  const [currentPreviewId, setCurrentPreviewId] = useState(null);
+
   const [currentTime, setCurrentTime] = useState(Date.now());
   const [mode, setMode] = useState(null);
 
@@ -44,7 +46,8 @@ export default function PropertyListings(props) {
     };
   }, [match.params.mode]);
 
-  const handlePropertyPreview = (propertyData) => {
+  const handlePropertyPreview = (propertyId) => {
+    setCurrentPreviewId(propertyId);
     setPropertyPreview(true);
   };
 
@@ -73,7 +76,7 @@ export default function PropertyListings(props) {
         setOpen={setPropertyPreview}
         title="Property Preview"
       >
-        <Property {...props} preview={true} />
+        <Property {...props} preview={true} propertyId={currentPreviewId} />
       </Slideover>
     </>
   );
