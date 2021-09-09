@@ -57,12 +57,24 @@ export default function PropertyListings(props) {
     return () => clearInterval(interval);
   }, []);
 
-  const properties = Object.values(propertyData).map((property, index) => {
-    return {
-      ...property,
-      auctionTime: auctionTimes[index],
-    };
-  });
+  const properties = Object.values(propertyData)
+    .filter((property) => {
+      if (mode === "past") {
+        return !!property.auctionCompleted;
+      } else if (mode === "upcoming") {
+        return !property.auctionLive && !property.auctionCompleted;
+      } else if (mode === "live") {
+        return property.auctionLive;
+      }
+
+      return true;
+    })
+    .map((property, index) => {
+      return {
+        ...property,
+        auctionTime: auctionTimes[index],
+      };
+    });
 
   return (
     <>

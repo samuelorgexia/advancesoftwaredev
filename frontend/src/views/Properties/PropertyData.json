@@ -18,9 +18,8 @@
       "date": 1631171986648
     }
   },
-
   "2": {
-    "id": 1,
+    "id": 2,
     "title": "$1,500,000 starting price!",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
@@ -40,7 +39,7 @@
     "auctionTime": null
   },
   "3": {
-    "id": 1,
+    "id": 3,
     "title": "$1,500,000 starting price!",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
@@ -60,7 +59,7 @@
     "auctionTime": null
   },
   "4": {
-    "id": 1,
+    "id": 4,
     "title": "$1,500,000 starting price!",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
@@ -80,7 +79,7 @@
     "auctionTime": null
   },
   "5": {
-    "id": 1,
+    "id": 5,
     "title": "$1,500,000 starting price!",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
@@ -100,7 +99,7 @@
     "auctionTime": null
   },
   "6": {
-    "id": 1,
+    "id": 6,
     "title": "$1,500,000 starting price!",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
