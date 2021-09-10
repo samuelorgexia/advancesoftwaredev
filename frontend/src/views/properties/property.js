@@ -6,9 +6,9 @@ export default function Property(props) {
   // gets the preview variable from props
   const { preview } = props;
 
-  if (preview) {
+  /*if (preview) {
     return <div>show in preview</div>;
-  }
+  }*/
 
   //shows when not preview
   return (
