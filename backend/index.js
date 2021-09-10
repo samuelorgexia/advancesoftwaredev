@@ -17,20 +17,20 @@ const connection = mysql.createConnection({
   database: dbconfig.database,
 });
 
- //open the MySQL connection
-connection.connect(error => {
+//open the MySQL connection
+/*connection.connect(error => {
     if (error) throw error;
     console.log("Successfully connected to the database.");
 
-/*
+
   const set = "CREATE TABLE users (user_id INT, First_Name VARCHAR(255), Last_Name VARCHAR(255),User_Role VARCHAR(255),Password VARCHAR(255),Email VARCHAR(255))";
   connection.query(set, function (err, result) {
     if (err) throw err;
     console.log("Ticket Table created");
   });
-*/
- });
- 
+
+ });*/
+
 app.listen(port, () => {
   console.log(`ASD app listening on ${port}`);
 });

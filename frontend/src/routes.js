@@ -4,11 +4,11 @@ import login from "./views/users/login";
 import signup from "./views/users/signup";
 import userManagement from "./views/users/user-management";
 
-import Property from './views/properties/property';
-import PropertyListings from "./views/properties/PropertyListings";
-
 import addProperty from "./views/admin/addProperty";
 import userAdmin from "./views/admin/userAdmin";
+
+import Property from "./views/Properties/Property";
+import PropertyListings from "./views/Properties/PropertyListings";
 
 const routes = [
   {
