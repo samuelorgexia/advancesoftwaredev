@@ -23,6 +23,7 @@ const navigation = [
 
 const userNavigation = [
   { name: "Settings", href: "/user-manage" },
+  {name:"Add Listing",href:"/add-property"},
   { name: "Sign out", href: "#" },
 ];
 
