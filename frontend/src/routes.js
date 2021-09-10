@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import login from "./views/users/login";
-import signup  from "./views/users/signup";
+import signup from "./views/users/signup";
 import userManagement from "./views/users/user-management";
 
-import Property from "./views/properties/property";
-import PropertyListings from "./views/properties/PropertyListings";
+import Property from "./views/Properties/Property";
+import PropertyListings from "./views/Properties/PropertyListings";
+
 import addProperty from "./views/admin/addProperty";
 import userAdmin from "./views/admin/userAdmin";
 
@@ -31,10 +32,11 @@ const routes = [
     component: PropertyListings,
     layout: "dashboardLayout",
   },
-  {title:"Signup",
-  pathname:"/signup",
-  component:signup,
-    layout:"dashboardLayout"
+  {
+    title: "Signup",
+    pathname: "/signup",
+    component: signup,
+    layout: "dashboardLayout",
   },
   {
     title: "View Property",
