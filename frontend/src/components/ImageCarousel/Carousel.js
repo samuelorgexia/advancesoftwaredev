@@ -17,13 +17,13 @@ const Carousel = () => {
     };
 
     return (
-        <section class = "slider">
+        <section class = "relative flex justify-center items-center">
             <ChevronLeftIcon class="w-15 h-12 z-10 bg-gray-500 bg-opacity-50 cursor-pointer absolute inset-y-50% left-0" onClick={prevSlide}/>
             <ChevronRightIcon class="w-15 h-12 z-10 bg-gray-500 bg-opacity-50 cursor-pointer absolute inset-y-50% right-0" onClick={nextSlide}/>
 
             {CarouselData.map ((slide, index) => {
                 return (
-                <div className={index === current ? 'slide-active' : 'slide'} key={index}> 
+                <div className={index === current ? "transition duration-150 ease-in-out" : 'slide'} key={index}> 
                     {index === current && (
                         <img src = {slide.image} className = 'image'/> 
 

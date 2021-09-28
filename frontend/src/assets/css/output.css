@@ -10,31 +10,6 @@ Document
 /**
 Use a better box model (opinionated).
 */
-.slider {
-  position: relative;
-  margin-top: 5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.image {
-  width: 120vh;
-  height: 600px;
-  border-radius: 10px;
-}
-
-
-.slide {
-  opacity: 0.5;
-}
-
-.slide-active {
-  opacity: 1;
-  transition-duration: 1s;
-  transform: scale(1.08);
-}
-
-
 
 *,
 ::before,
