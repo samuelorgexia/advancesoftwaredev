@@ -122,7 +122,7 @@ export default function PropertyDetails( {id} ) {
                     <div class="mt-10 overflow-hidden">
                         <div class="grid grid-cols-1 md:grid-cols-2">
                             <form class="p-6 mr-2 mb-10 bg-gray-100 dark:bg-gray-800 sm:rounded-lg ">
-                                <h1 class="text-4xl my-2"> Schedule Tour </h1>
+                                <h1 class="text-4xl my-2"> Contact Agent </h1>
                                 <div class="flex flex-wrap -mx-3 mb-6">
                                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 
@@ -165,7 +165,7 @@ export default function PropertyDetails( {id} ) {
                             </form>
                             <form class="w-full max-w-lg">
                                 <form class="p-6 flex flex-col justify-center">
-                                    <h1 class="text-4xl">Contact Agent</h1>
+                                    <h1 class="text-4xl">Shedule Tour</h1>
                                     <div class="flex flex-col">
                                         <label for="name" class="hidden">Full Name</label>
                                         <input type="name" name="name" id="name" placeholder="Full Name" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"/>
