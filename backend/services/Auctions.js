@@ -1,3 +1,7 @@
-exports.getById = function(id) {
-    return { status: "success", id };
+function getById(id) {
+    return { status: "success", id};
+}
+
+module.exports = {
+    getById
 }
