@@ -5,6 +5,6 @@ const AuctionController = require("./controllers/AuctionsController");
 
 router.use("/properties", properties);
 
-router.use("/auction", AuctionController.show);
+router.use("/auction/:id", AuctionController.show);
 
 module.exports = router;
