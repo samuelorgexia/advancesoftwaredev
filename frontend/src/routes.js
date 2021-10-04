@@ -9,6 +9,7 @@ import userAdmin from "./views/admin/userAdmin";
 
 import Property from "./views/Properties/Property";
 import PropertyListings from "./views/Properties/PropertyListings";
+import Auction from "./views/Auction/Auction";
 
 const routes = [
   {
@@ -56,6 +57,12 @@ const routes = [
     component: userAdmin,
     layout: "dashboardLayout",
   },
+  {
+    title: "Auction",
+    pathname:"/auction/:id",
+    component: Auction,
+    layout: "dashboardLayout",
+  }
 ];
 
 /*function routes() {
