@@ -43,8 +43,8 @@ export default function PropertyCard(props) {
         </div>
         <div className="py-4">
           {property.auctionLive ? (
-            <Button colour="red" onClick={goToAuction}>
-              View Auction
+            <Button colour="red">
+              <Link to={`/auction/${property.id}`}>View Auction</Link>
             </Button>
           ) : property.auctionCompleted ? (
             <Button colour="gray" onClick={goToAuction}>
