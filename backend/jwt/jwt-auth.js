@@ -9,8 +9,10 @@ if(!token){
 }
 try{
     const decode=jwt.verify(token,process.env.asdJwt);
-    console.log(decode);
-    req.user=decode.user_id;
+   // console.log(decode);
+    req.user={id:decode.id,role:decode.role};
+    //req.user=decode.role;
+    
     next();
 }catch(err){
     return res.status(401).send("Invalid Token");

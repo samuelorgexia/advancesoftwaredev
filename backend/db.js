@@ -20,29 +20,28 @@ connection.connect(error => {
     (role_id SERIAL,
       role_name VARCHAR(40),
       PRIMARY KEY(role_id)
-      )
+      )ENGINE=INNODB
     `;
-    const userRole= `
-    CREATE TABLE IF NOT EXISTS user_role 
-    (user_role_id SERIAL,
-     user_id INT,
-     role_id INT,
-     PRIMARY KEY(user_role_id)
 
-
-      )`;
-  
     const user = `
     CREATE TABLE IF NOT EXISTS user
-     (user_id SERIAL,
-       first_name VARCHAR(40),
-        last_name VARCHAR(40),
-        user_role_id INT,
-        password VARCHAR(255),
-        email VARCHAR(255),
-        user_type VARCHAR(40),
-        PRIMARY KEY (user_id)
-        )`;
+    (user_id SERIAL,
+      first_name VARCHAR(40),
+       last_name VARCHAR(40),
+       role VARCHAR(40),
+       password VARCHAR(255),
+       email VARCHAR(255),
+       user_type INT,
+       PRIMARY KEY (user_id)
+       )ENGINE=INNODB`;
+
+       const realestate =`
+       CREATE TABLE IF NOT EXISTS auctioner 
+       (auction_id SERIAL, 
+        real_estate_company VARCHAR(255),
+        PRIMARY KEY (auction_id)
+        )ENGINE=INNODB
+       `;
       
        
          connection.query(role, function (err, result) {
@@ -55,12 +54,12 @@ connection.connect(error => {
       if (err) throw err;
       console.log("user Table created");
     });
-    
-    
-    connection.query(userRole, function (err, result) {
-      if (err) throw err;
-      console.log("user role Table created");
+
+    connection.query(realestate,function(err,result){
+      if(err) throw err;
+      console.log("auctioner table created");
     });
+    
     // insert role data 
     const getRoles=`SELECT * FROM role`;
     connection.query(getRoles,function(err,results){

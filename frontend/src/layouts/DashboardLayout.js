@@ -5,13 +5,15 @@ import { Route, Redirect } from "react-router-dom";
 import DashboardNav from "../components/NavBars/DashboardNav.js";
 
 import routes from "../routes.js";
-
+import axios from "axios";
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
+
+
 
 const navigation = [
   { name: "All Properties", path: "/properties/all" },
@@ -21,15 +23,47 @@ const navigation = [
   {name: "SignUp",path:"/signup"},
 ];
 
+
 const userNavigation = [
-  { name: "Settings", href: "/user-manage" },
-  {name:"Add Listing",href:"/add-property"},
-  { name: "Sign out", href: "#" },
+  {name:"Login",href:"/login"}
 ];
 
 export default function DashboardLayout(props) {
   const [overrideTitle, setOverrideTitle] = useState(null);
+  const [login,setLogin]=useState(false);
 
+  function logout(){
+    console.log("works");
+      localStorage.clear();
+      localStorage.removeItem("jwttoken")
+      window.location.href='/properties/all';
+    }
+
+  const getUser=()=>{
+    axios({
+      method:'post',
+      url:'http://localhost:5000/user/verify',
+      headers:{
+      "jwt":localStorage.getItem('jwttoken'),
+      }
+    }).then((response)=>{
+      console.log(response);
+      if(response.data=true){
+        // remove sign up link
+        navigation.splice(4,1);
+        // add user management settings 
+      userNavigation.push(  { name: "Settings", href: "/user-manage" });
+      userNavigation.push(  {name:"Add Listing",href:"/add-property"});
+      userNavigation.push({ name: "Sign out", href:"#",onClick:()=>{ window.location.href='/properties/all'; } });
+      userNavigation.splice(0,1);
+      }
+      
+    })
+    .catch(function(error){
+      console.log(error);
+      localStorage.clear();
+    });
+  }
   const getRoutes = (routes) => {
     return routes.map((route, index) => {
       if (route.layout === "dashboardLayout") {
@@ -69,6 +103,9 @@ export default function DashboardLayout(props) {
 
     return route ? route.title || "Default Title" : "Default Title";
   };
+  useEffect(()=>{
+    getUser();
+  },[]);
 
   return (
     <div>
