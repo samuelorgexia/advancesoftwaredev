@@ -28,7 +28,7 @@ const connection = mysql.createConnection({
 
 const registerBidHandler = require("./handlers/bidHandler");
 
-const onConnection = (socket)=> {
+const onConnection = (socket) => {
   registerBidHandler(io, socket);
 }
 
