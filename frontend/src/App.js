@@ -6,10 +6,13 @@ import {
   Redirect,
 } from "react-router-dom";
 
+
 import DashboardLayout from "./layouts/DashboardLayout.js";
 import AuthLayout from "./layouts/AuthLayout.js";
-
 import routes from "./routes";
+
+// import io from 'socket.io-client'
+// const socket = io.connect("http://localhost:3001");
 
 function App() {
   /*const getRoutes = () => {
