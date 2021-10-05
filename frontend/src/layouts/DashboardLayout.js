@@ -24,19 +24,15 @@ const navigation = [
   { name: "Live Auctions", path: "/properties/live" },
   { name: "Upcoming Auctions", path: "/properties/upcoming" },
   { name: "Past Auctions", path: "/properties/past" },
+  {name: "SignUp",path:"/signup"},
 ];
 
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  {
-    name: "Sign out",
-    href: "#",
-    onClick: () => {
-      //signout function here
-    },
-  },
+  { name: "Settings", href: "/user-manage" },
+  { name:"Add Listing",href:"/add-property" },
+  { name: "Sign out", href: "#" },
 ];
+
 
 export default function DashboardLayout(props) {
   const [overrideTitle, setOverrideTitle] = useState(null);

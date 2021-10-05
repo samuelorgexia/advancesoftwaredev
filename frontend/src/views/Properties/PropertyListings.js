@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import propertyData from "./PropertyData.json";
+import Property from "./Property";
 
 import Properties from "../../components/Properties/Properties.js";
 import Slideover from "../../components/Slideover/Slideover.js";
