@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import axios from "axios";
 
 function DetailsPopup(props){
@@ -6,10 +6,29 @@ function DetailsPopup(props){
     const [lastName,setLastName]=useState("");
     const [email,setEmail]=useState("");
 
+    const getUser =()=>{
+      console.log(localStorage.jwttoken)
+      axios({
+        method:'post',
+        url:'http://localhost:5000/user/get-user',
+        withCredentials:true,
+        headers:{
+          jwt:localStorage.jwttoken,
+        },
+        responseType:'stream'
+      }).then(function(response){
+        const user=response.data[0]
+        //setFirstName(user.first_name);
+        console.log(response.data[0]);
+      });
+    }
+ 
+
     const updateDetails=()=>{
+      console.log(firstName);
       axios({
         method:'put',
-        url:'http://localhost:5000/user/update-user',
+        url:'http://localhost:5000/user/update-user-themselves',
         headers:{
           jwt:localStorage.getItem('jwttoken'),
         },
@@ -21,9 +40,16 @@ function DetailsPopup(props){
       }).then(function(reponse){
         console.log(reponse);
          props.setTrigger(false);
-      });
+      }).catch(function(error){
+        console.log(error);
+      
+    });
      
     }
+    useEffect(()=>{
+      getUser();
+      //test();
+    });
 
     return (props.trigger)?(
         <div>

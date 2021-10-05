@@ -13,7 +13,7 @@ try{
     req.user={id:decode.id,role:decode.role};
     //req.user=decode.role;
     
-    next();
+  //  next();
 }catch(err){
     return res.status(401).send("Invalid Token");
 

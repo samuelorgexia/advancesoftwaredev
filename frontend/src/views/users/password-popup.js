@@ -1,18 +1,18 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { Dialog, Transition } from '@headlessui/react'
 import axios from "axios";
 function PasswordPopup(props){
   const [password,setPassword]=useState("");
   const [confirmPassword,setConfirmPassword]=useState("");
-  
+  const [error,setError]=useState("");
   const changePassword=()=>{
     if(password==confirmPassword){
       console.log("match");
       axios({
         method:'put',
-        url:'',
+        url:'http://localhost:5000/user/update-user-password',
         headers:{
-          "jwt":localStorage.getItem('jwttoken'),
+          jwt:localStorage.getItem('jwttoken'),
         },
         data:{
           password:password
@@ -23,7 +23,9 @@ function PasswordPopup(props){
       });
      
     }else{
-      console.log("password does not match");
+      if(password!=confirmPassword){
+      setError("Password does not match");
+      } 
     }
   }
 
@@ -42,7 +44,7 @@ function PasswordPopup(props){
         Confirm New Password
       </label>
       <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="passwordConfirm" type="password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Confirm Password"/>
-      
+      <p>{error}</p>
     </div>
     <div class="flex items-center justify-between">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={changePassword}>

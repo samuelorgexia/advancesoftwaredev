@@ -20,30 +20,11 @@ import axios from 'axios';
   const [name,setName]=useState("");
   const cancelButtonRef = useRef(null)
 
-      const getUser =()=>{
-        console.log(localStorage.jwttoken)
-        axios({
-          method:'get',
-          url:'http://localhost:5000/user/get-user',
-          headers:{
-            jwt:localStorage.jwttoken,
-          },
-          responseType:'stream'
-        }).then(function(response){
-          console.log(response);
-        });
-      }
-      useEffect(() => {
-        getUser();
-        
-      }, []);
     
     return(
        
         <div >
-          <div>
-            <p>Hello</p>
-          </div>
+          
              <ul >
         <li class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><button  onClick={()=>setpassPopup(true)} >Change Password</button></li>
         <li class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><button onClick={()=>setdePopup(true)}  >Change Details</button></li>

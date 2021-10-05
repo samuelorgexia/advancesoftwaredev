@@ -6,6 +6,7 @@ const bycrpt = require('bcrypt');
 const createJwt = require("./jwt/jwt-function");
 const jwtAuth = require('./jwt/jwt-auth');
 const newUserVerify=require('./middleware/newUserVerify');
+const { password } = require("./db.config");
 const salt=10;
 
 router.post("/signup",async (req,res)=>{
@@ -88,62 +89,86 @@ router.get("/find-user/:id",(req,res)=>{
   }
 });
   // user features
-router.get("/get-user",jwtAuth,async(req,res)=>{
-  
-  console.log("get user"+req.user.id)
-  
-  try{
-    //res.json(true);
+router.post("/get-user",jwtAuth,(req,res)=>{
+try{    
     const sql='SELECT * FROM user WHERE user_id ='+ connection.escape(req.user.id);
     console.log(sql);
-    connection.query(sql,function(err,result){
-      if(err) throw err;
-      res.json(result);
-   
-    });
-    
-  }catch(err){
-    console.log(err.message);
-    res.status(500).send("server error");
+    const get=connection.query(sql,(err, data) => {
+      if(err) {
+          console.error(err);
+          return;
+      }
+      res.json(data);
+     // console.log(data);
+  
+      
+  });
+}catch(err){
+  console.error(err.message);
+  res.status(500).send("server error");
+}
 
-  }
+ 
 });
   // admin feature
 router.put("/update-user/:id",async(req,res)=>{
   const {id}=req.params;
   var {firstName,lastName,email,password}=req.body;
-  console.log(req.body);
-  console.log(id);
+  
   try{
-    // fill in blanks
-    const sql='SELECT * FROM user WHERE user_id ='+ connection.escape(id);
-     connection.query(sql,function(err,result){
-        if(err)throw err;
-        const firstNamePrev=JSON.parse(JSON.stringify(result[0].first_name));
-        console.log(JSON.parse(JSON.stringify(password.length)));
-        
-
-        if(password.length==0){
-          password=JSON.parse(JSON.stringify(result[0].password));
-        }
-        if(firstName.length==0){
-          firstName=JSON.parse(JSON.stringify(result[0].first_name));
-        }
-        if(lastName.length==0){
-          lastName=JSON.parse(JSON.stringify(result[0].last_name));
-        }
-        if(email.length==0){
-          email=JSON.parse(JSON.stringify(result[0].email));
-        }
-      });
-   
-      password= await bycrpt.hash(password,salt);
-      const updatesql='UPDATE user SET first_name=?,last_name=?,password=?,email=? WHERE user_id ='+connection.escape(id);
-      connection.query(updatesql,[firstName,lastName,password,email],function(err,result){
-        if(err) throw err;
-        res.send("updated details");
-      });
-
+      // retrieve current details
+      const sql='SELECT * FROM user WHERE user_id ='+ connection.escape(id);
+      connection.query(sql,function(err,result){
+         if(err)throw err;
+           const previousFirstName=JSON.parse(JSON.stringify(result[0].first_name));
+           const previousLastName=JSON.parse(JSON.stringify(result[0].last_name));
+           const previousEmail=JSON.parse(JSON.stringify(result[0].email));
+           const previousPassword=JSON.parse(JSON.stringify(result[0].password));
+           // update details first 
+       const updatesql='UPDATE user SET first_name=?,last_name=?,email=?,password=? WHERE user_id ='+connection.escape(id);
+       connection.query(updatesql,[firstName,lastName,email,password],function(err,result){
+         if(err) throw err;
+      // console.log(result);
+       });
+       // fill in details that body did not have 
+       if(email==''){
+         console.log("email");
+         const updateEmail='UPDATE user SET email=? WHERE user_id ='+connection.escape(req.user.id);
+         connection.query(updateEmail,[previousEmail],function(err,result){
+           if(err) throw err;
+         //  console.log(result);
+         });
+       }
+       if(firstName==''){
+         console.log("first name");
+         const updateFirstName='UPDATE user SET first_name=? WHERE user_id ='+connection.escape(req.user.id);
+         connection.query(updateFirstName,[previousFirstName],function(err,result){
+           if(err) throw err;
+         //  console.log(result);
+         });
+     
+       }
+       if(lastName==''){
+         console.log("last name");
+         const updatesqlLastName='UPDATE user SET last_name=? WHERE user_id ='+connection.escape(req.user.id);
+         connection.query(updatesqlLastName,[previousLastName],function(err,result){
+           if(err) throw err;
+       //  console.log(result);
+         });
+       }
+       if(password==''){
+        console.log("password");
+        const updatesqlPassword='UPDATE user SET password=? WHERE user_id ='+connection.escape(req.user.id);
+        connection.query(updatesqlPassword,[previousPassword],function(err,result){
+          if(err) throw err;
+      //  console.log(result);
+        });
+      }
+       });
+       
+     res.send("Updated details");
+ 
+ 
 
 
   }catch (err){
@@ -153,36 +178,54 @@ router.put("/update-user/:id",async(req,res)=>{
 });
   // update user for themselves when login
 router.put("/update-user-themselves",jwtAuth,async(req,res)=>{
-  var {firstName,lastName,password}=req.body;
+  var {firstName,lastName,email}=req.body;
   console.log(req.body);
   console.log(req.user.id);
   try{
-    // fill in blanks
+  
+    // retrieve current details
     const sql='SELECT * FROM user WHERE user_id ='+ connection.escape(req.user.id);
      connection.query(sql,function(err,result){
         if(err)throw err;
-        const firstNamePrev=JSON.parse(JSON.stringify(result[0].first_name));
-        console.log(JSON.parse(JSON.stringify(password.length)));
-        
+          const previousFirstName=JSON.parse(JSON.stringify(result[0].first_name));
+          const previousLastName=JSON.parse(JSON.stringify(result[0].last_name));
+          const previousEmail=JSON.parse(JSON.stringify(result[0].email));
 
-        if(password.length==0){
-          password=JSON.parse(JSON.stringify(result[0].password));
-        }
-        if(firstName.length==0){
-          firstName=JSON.parse(JSON.stringify(result[0].first_name));
-        }
-        if(lastName.length==0){
-          lastName=JSON.parse(JSON.stringify(result[0].last_name));
-        }
-      });
-   
-      password= await bycrpt.hash(password,salt);
-      const updatesql='UPDATE user SET first_name=?,last_name=?,password=? WHERE user_id ='+connection.escape(req.user.id);
-      connection.query(updatesql,[firstName,lastName,password],function(err,result){
+          // update details first 
+      const updatesql='UPDATE user SET first_name=?,last_name=?,email=? WHERE user_id ='+connection.escape(req.user.id);
+      connection.query(updatesql,[firstName,lastName,email],function(err,result){
         if(err) throw err;
-        res.send("updated details");
+     // console.log(result);
       });
-
+      // fill in details that body did not have 
+      if(email==''){
+        console.log("email");
+        const updateEmail='UPDATE user SET email=? WHERE user_id ='+connection.escape(req.user.id);
+        connection.query(updateEmail,[previousEmail],function(err,result){
+          if(err) throw err;
+        //  console.log(result);
+        });
+      }
+      if(firstName==''){
+        console.log("first name");
+        const updateFirstName='UPDATE user SET first_name=? WHERE user_id ='+connection.escape(req.user.id);
+        connection.query(updateFirstName,[previousFirstName],function(err,result){
+          if(err) throw err;
+        //  console.log(result);
+        });
+    
+      }
+      if(lastName==''){
+        console.log("last name");
+        const updatesqlLastName='UPDATE user SET last_name=? WHERE user_id ='+connection.escape(req.user.id);
+        connection.query(updatesqlLastName,[previousLastName],function(err,result){
+          if(err) throw err;
+      //  console.log(result);
+        });
+      }
+      });
+      
+    res.send("Updated details");
 
 
   }catch (err){
@@ -191,6 +234,25 @@ router.put("/update-user-themselves",jwtAuth,async(req,res)=>{
   }
 });
 
+  // update user password for themselves when log in
+  router.put("/update-user-password",jwtAuth,async(req,res)=>{
+    var {password}=req.body;
+    console.log(password.length);
+    console.log(req.user.id);
+    try{
+        password= await bycrpt.hash(password,salt);
+        const updatesql='UPDATE user SET password=? WHERE user_id ='+connection.escape(req.user.id);
+        connection.query(updatesql,[password],function(err,result){
+          if(err) throw err;
+          res.send("updated password");
+        });  
+    }catch (err){
+      console.log(err.message);
+  
+    }
+  });
+  
+  
 
 router.delete("/delete-user/:id",(req,res)=>{
     const {id}=req.params;
@@ -206,8 +268,8 @@ router.delete("/delete-user/:id",(req,res)=>{
 
 });
 router.post("/verify",jwtAuth,async(req,res)=>{
+  console.log(res.headersSent);
   try{
-    
     res.json(true);
   }catch(err){
     console.error(err.message);

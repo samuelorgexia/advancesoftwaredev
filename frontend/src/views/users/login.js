@@ -9,7 +9,7 @@ function Login(){
       method:'post',
       url:'http://localhost:5000/user/login',
       data:{
-        email:email,
+        email:email.toLowerCase(),
         password:password
       }
     }).then(function(response){

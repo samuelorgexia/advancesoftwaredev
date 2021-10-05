@@ -44,7 +44,7 @@ export default function DashboardLayout(props) {
       method:'post',
       url:'http://localhost:5000/user/verify',
       headers:{
-      "jwt":localStorage.getItem('jwttoken'),
+      jwt:localStorage.getItem('jwttoken'),
       }
     }).then((response)=>{
       console.log(response);
