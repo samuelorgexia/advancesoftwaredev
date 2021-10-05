@@ -93,12 +93,11 @@ export default function DashboardNav(props) {
                           <Menu.Item key={item.name}>
                             {({ active }) => (
                               <a
-                                href={item.href}
                                 className={`${
                                   active ? "bg-gray-100" : ""
                                 } block px-4 py-2 text-sm text-gray-700
                               `}
-                                onClick={item.onClick ? item.onClick : null}
+                                {...item}
                               >
                                 {item.name}
                               </a>
@@ -182,9 +181,8 @@ export default function DashboardNav(props) {
                 {userNavigation.map((item) => (
                   <a
                     key={item.name}
-                    href={item.href}
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-                    onClick={item.onClick ? item.onClick : null}
+                    {...item}
                   >
                     {item.name}
                   </a>
