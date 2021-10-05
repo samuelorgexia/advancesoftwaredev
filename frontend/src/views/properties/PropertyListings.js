@@ -6,10 +6,16 @@ import Properties from "../../components/Properties/Properties.js";
 import Slideover from "../../components/Slideover/Slideover.js";
 import Property from "./Property.js";
 
+import PropertyMap from "../../components/Properties/PropertyMap.js";
+
+import Button from "../../components/Buttons/Button";
+
+import { MapIcon, ViewListIcon } from "@heroicons/react/solid";
+
 const now = Date.now();
 
 export default function PropertyListings(props) {
-  const { setOverrideTitle, match } = props;
+  const { setOverrideTitle, match, setHeaderFeature, mapView } = props;
 
   const [propertyPreview, setPropertyPreview] = useState(false);
   const [currentPreviewId, setCurrentPreviewId] = useState(null);
@@ -54,7 +60,9 @@ export default function PropertyListings(props) {
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime((t) => t + 1000), 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const properties = Object.values(propertyData)
@@ -78,11 +86,21 @@ export default function PropertyListings(props) {
 
   return (
     <>
-      <Properties
-        onPropertyPreview={handlePropertyPreview}
-        properties={properties}
-        currentTime={currentTime}
-      />
+      {mapView ? (
+        <PropertyMap
+          onPropertyPreview={handlePropertyPreview}
+          properties={properties}
+          currentTime={currentTime}
+        />
+      ) : (
+        <Properties
+          onPropertyPreview={handlePropertyPreview}
+          properties={properties}
+          currentTime={currentTime}
+          mapView={props.mapView}
+        />
+      )}
+
       <Slideover
         open={propertyPreview}
         setOpen={setPropertyPreview}

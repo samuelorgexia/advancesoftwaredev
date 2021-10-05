@@ -28,19 +28,32 @@ export default function DashboardNav(props) {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navigation.map((item, index) => (
-                      <NavLink
-                        key={index}
-                        to={item.path}
-                        className={`${
-                          item.path === window.location.pathname
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                        } px-3 py-2 rounded-md text-sm font-medium`}
-                      >
-                        {item.name}
-                      </NavLink>
-                    ))}
+                    {navigation.map((item, index) =>
+                      item.onClick ? (
+                        <a
+                          key={index}
+                          href={item.path || "#"}
+                          className={`${
+                            item.path === window.location.pathname
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                          } px-3 py-2 rounded-md text-sm font-medium`}
+                          onClick={item.onClick}
+                        />
+                      ) : (
+                        <NavLink
+                          key={index}
+                          to={item.path}
+                          className={`${
+                            item.path === window.location.pathname
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                          } px-3 py-2 rounded-md text-sm font-medium`}
+                        >
+                          {item.name}
+                        </NavLink>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -75,7 +88,7 @@ export default function DashboardNav(props) {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
@@ -85,6 +98,7 @@ export default function DashboardNav(props) {
                                   active ? "bg-gray-100" : ""
                                 } block px-4 py-2 text-sm text-gray-700
                               `}
+                                onClick={item.onClick ? item.onClick : null}
                               >
                                 {item.name}
                               </a>
@@ -112,19 +126,32 @@ export default function DashboardNav(props) {
 
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navigation.map((item, index) => (
-                <NavLink
-                  key={index}
-                  to={item.path}
-                  className={`${
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                  } block px-3 py-2 rounded-md text-base font-medium`}
-                >
-                  {item.name}
-                </NavLink>
-              ))}
+              {navigation.map((item, index) =>
+                item.onClick ? (
+                  <a
+                    key={index}
+                    href={item.path || "#"}
+                    className={`${
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                    } block px-3 py-2 rounded-md text-base font-medium`}
+                    onClick={item.onClick}
+                  />
+                ) : (
+                  <NavLink
+                    key={index}
+                    to={item.path}
+                    className={`${
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                    } block px-3 py-2 rounded-md text-base font-medium`}
+                  >
+                    {item.name}
+                  </NavLink>
+                )
+              )}
             </div>
             <div className="pt-4 pb-3 border-t border-gray-700">
               <div className="flex items-center px-5">
@@ -157,6 +184,7 @@ export default function DashboardNav(props) {
                     key={item.name}
                     href={item.href}
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                    onClick={item.onClick ? item.onClick : null}
                   >
                     {item.name}
                   </a>

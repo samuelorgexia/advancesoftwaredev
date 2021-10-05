@@ -1,10 +1,16 @@
 import React, { useState, useEffect, Fragment } from "react";
 
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useHistory } from "react-router-dom";
 
 import DashboardNav from "../components/NavBars/DashboardNav.js";
 
+import Button from "../components/Buttons/Button";
+
+import { MapIcon, ViewListIcon } from "@heroicons/react/solid";
+
 import routes from "../routes.js";
+
+import Marker from "../components/Map/Marker.js";
 
 const user = {
   name: "Tom Cook",
@@ -23,11 +29,21 @@ const navigation = [
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  {
+    name: "Sign out",
+    href: "#",
+    onClick: () => {
+      //signout function here
+    },
+  },
 ];
 
 export default function DashboardLayout(props) {
   const [overrideTitle, setOverrideTitle] = useState(null);
+
+  const [headerFeature, setHeaderFeature] = useState(null);
+
+  const [mapView, setMapView] = useState(false);
 
   const getRoutes = (routes) => {
     return routes.map((route, index) => {
@@ -42,6 +58,8 @@ export default function DashboardLayout(props) {
                   {...rest}
                   {...props}
                   setOverrideTitle={setOverrideTitle}
+                  setHeaderFeature={setHeaderFeature}
+                  mapView={mapView}
                 />
               );
             }}
@@ -79,13 +97,34 @@ export default function DashboardLayout(props) {
       />
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            {overrideTitle || getActiveRouteTitle(routes)}
-          </h1>
+          <div className="flex justify-between items-stretch">
+            <h1 className="text-3xl font-bold text-gray-900">
+              {overrideTitle || getActiveRouteTitle(routes)}
+            </h1>
+            {props.match.path.indexOf("properties") !== -1 ? (
+              <div>
+                {mapView ? (
+                  <Button colour="gray" onClick={() => setMapView(false)}>
+                    <ViewListIcon className="w-5 mx-auto" />
+                    <span className="pl-2 text-s my-auto">List only</span>
+                  </Button>
+                ) : (
+                  <Button colour="blue" onClick={() => setMapView(true)}>
+                    <MapIcon className="w-5 mx-auto" />
+                    <span className="pl-2 text-s my-auto">View Map</span>
+                  </Button>
+                )}
+              </div>
+            ) : null}
+          </div>
         </div>
       </header>
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div
+          className={
+            mapView ? "w-full" : "max-w-7xl mx-auto py-6 sm:px-6 lg:px-8"
+          }
+        >
           {getRoutes(routes)}
         </div>
       </main>

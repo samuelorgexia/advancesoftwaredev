@@ -13,6 +13,10 @@
       "bath": 1,
       "car": 1
     },
+    "coords": {
+      "lat": -33.81781802979944,
+      "long": 151.08774533246867
+    },
     "size": 235,
     "agent": "Abraham Lincoln",
     "auctioneer": "George Washington",
@@ -21,7 +25,7 @@
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"
-      ],
+    ],
     "auctionLive": false,
     "auctionTime": null,
     "auctionCompleted": {
@@ -42,6 +46,7 @@
       "bath": 1,
       "car": 1
     },
+
     "size": 235,
     "agent": "Abraham Lincoln",
     "auctioneer": "George Washington",
@@ -50,10 +55,10 @@
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"
-      ],
+    ],
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.8183056482321,
+      "long": 151.0658158673482
     },
     "auctionLive": true,
     "auctionTime": null
@@ -76,8 +81,8 @@
     "auctioneer": "George Washington",
     "auctionLocation": "UTS Building 11",
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.81276436592353,
+      "long": 151.08128921214572
     },
     "auctionLive": false,
     "auctionTime": null
@@ -100,8 +105,8 @@
     "auctioneer": "George Washington",
     "auctionLocation": "UTS Building 11",
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.813916982211616,
+      "long": 151.06192085296811
     },
     "auctionLive": false,
     "auctionTime": null
@@ -124,8 +129,8 @@
     "auctioneer": "George Washington",
     "auctionLocation": "UTS Building 11",
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.81959117442473,
+      "long": 151.06410846378432
     },
     "auctionLive": false,
     "auctionTime": null
@@ -148,8 +153,8 @@
     "auctioneer": "George Washington",
     "auctionLocation": "UTS Building 11",
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.81577886802395,
+      "long": 151.07819454318624
     },
     "auctionLive": false,
     "auctionTime": null
