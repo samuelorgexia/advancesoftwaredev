@@ -1,19 +1,32 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import Carousel from "../../components/ImageCarousel/Carousel.js";
 import { Link } from "react-router-dom";
-import Button from "../../components/Buttons/Button.js";
+import LiveChat from "../../components/LiveChat/LiveChat.js";
 import PropertyData from "./PropertyData.json";
 import OtherListings from "./OtherListings.js"
 import { ReactComponent as BedIcon } from "../../assets/icons/bed.svg";
 import { ReactComponent as BathIcon } from "../../assets/icons/bath.svg";
 import { ReactComponent as CarIcon } from "../../assets/icons/car.svg";
+import io from 'socket.io-client'
+const socket = io.connect("http://localhost:3001");
+
 
 export default function PropertyDetails( {id} ) {
 
+    const [username, setUsername]= useState("")
+    const [room, setRoom] = useState("")
+    const [showChat, setShowChat] = useState(false);
+
+    // establishes room
+    const joinRoom = () => {
+        if (username !== "" && room !== "") {
+            socket.emit("join_room", room)
+            setShowChat(true);
+        }
+    }
+
     return (
         <>
-        
-
             <div class="lg:flex bg-gray-300">
                 <div class="flex items-center justify-center w-full px-6 py-8 lg:h-128 lg:w-1/2">
                     <div class="max-w-xl">
@@ -122,7 +135,7 @@ export default function PropertyDetails( {id} ) {
                     <div class="mt-10 overflow-hidden">
                         <div class="grid grid-cols-1 md:grid-cols-2">
                             <form class="p-6 mr-2 mb-10 bg-gray-100 dark:bg-gray-800 sm:rounded-lg ">
-                                <h1 class="text-4xl my-2"> Schedule Tour </h1>
+                                <h1 class="text-4xl my-2"> Contact Agent </h1>
                                 <div class="flex flex-wrap -mx-3 mb-6">
                                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 
@@ -165,7 +178,7 @@ export default function PropertyDetails( {id} ) {
                             </form>
                             <form class="w-full max-w-lg">
                                 <form class="p-6 flex flex-col justify-center">
-                                    <h1 class="text-4xl">Contact Agent</h1>
+                                    <h1 class="text-4xl">Shedule Tour</h1>
                                     <div class="flex flex-col">
                                         <label for="name" class="hidden">Full Name</label>
                                         <input type="name" name="name" id="name" placeholder="Full Name" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"/>
@@ -190,6 +203,39 @@ export default function PropertyDetails( {id} ) {
                     </div>
                 </div>
             </div>
+
+            {!showChat ? (
+            <div>
+                <h3>Join Chat</h3>
+
+            <input
+                class="rounded-lg bg-gray-500"
+                type="text"
+                placeholder="John..."
+                onChange={(event) => {
+                    setUsername(event.target.value);
+                }}
+            />       
+                <input 
+                    class="rounded-lg bg-gray-500" 
+                    type="text" 
+                    placeholder="Room ID.."
+                    onChange={(event) => {
+                        setRoom(event.target.value);
+                    }}
+                />
+                <button 
+                    class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300"
+                    onClick={joinRoom}
+                > 
+                    Join Chat                 
+                </button>
+            </div>
+            
+            ) : (
+                <LiveChat socket={socket} username={username} room={room}/>
+            )}    
+
         </>
       )
 }
