@@ -7,7 +7,6 @@ function PasswordPopup(props){
   const [error,setError]=useState("");
   const changePassword=()=>{
     if(password==confirmPassword){
-      console.log("match");
       axios({
         method:'put',
         url:'http://localhost:5000/user/update-user-password',
@@ -25,7 +24,9 @@ function PasswordPopup(props){
     }else{
       if(password!=confirmPassword){
       setError("Password does not match");
+      
       } 
+      
     }
   }
 

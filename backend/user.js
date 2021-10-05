@@ -240,12 +240,17 @@ router.put("/update-user-themselves",jwtAuth,async(req,res)=>{
     console.log(password.length);
     console.log(req.user.id);
     try{
+      if(password.length!=0){
+        console.log("password update");
         password= await bycrpt.hash(password,salt);
         const updatesql='UPDATE user SET password=? WHERE user_id ='+connection.escape(req.user.id);
         connection.query(updatesql,[password],function(err,result){
           if(err) throw err;
           res.send("updated password");
         });  
+      }else {
+        res.send("No password field in");
+      }
     }catch (err){
       console.log(err.message);
   
