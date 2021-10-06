@@ -2,11 +2,13 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import {CarouselData} from './CarouselData.js';
 import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/solid';
+import PropertyData from "../../views/Properties/PropertyData.json";
 
-const Carousel = () => {
+const Carousel = ( {id} ) => {
 
     const [current, setCurrent] = useState(0);
-    const length = CarouselData.length;
+    // const length = CarouselData.length;
+    const length = PropertyData[id].image.length;
 
     const nextSlide = () => {
         setCurrent(current === length - 1 ? 0 : current + 1)
@@ -21,12 +23,11 @@ const Carousel = () => {
             <ChevronLeftIcon class="w-15 h-12 z-10 bg-gray-500 bg-opacity-50 cursor-pointer absolute inset-y-50% left-0" onClick={prevSlide}/>
             <ChevronRightIcon class="w-15 h-12 z-10 bg-gray-500 bg-opacity-50 cursor-pointer absolute inset-y-50% right-0" onClick={nextSlide}/>
 
-            {CarouselData.map ((slide, index) => {
+            {PropertyData[id].image.map ((slide, index) => {
                 return (
-                <div className={index === current ? "transition duration-150 ease-in-out" : 'slide'} key={index}> 
+                <div  > 
                     {index === current && (
-                        <img src = {slide.image} className = 'image'/> 
-
+                        <img src = {PropertyData[id].image[index]}/> 
                     )}
                 </div>                    
                 )

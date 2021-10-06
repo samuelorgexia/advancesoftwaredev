@@ -42,7 +42,7 @@ export default function PropertyDetails( {id} ) {
                 
                 <div class="w-full h-64 lg:w-1/2 lg:h-auto">
                     <div class="w-full h-full bg-cover">
-                        <Carousel />
+                        <Carousel id={id} />
                     </div>
                 </div>
             </div>
@@ -111,20 +111,20 @@ export default function PropertyDetails( {id} ) {
                 <div class="flex items-center justify-center">
                     <div class="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         <div class="w-full max-w-xs text-center">
-                            <OtherListings id={id}/>
+                            <OtherListings id={3}/>
                         </div>
 
                         <div class="w-full max-w-xs text-center">
-                            <OtherListings id={id}/>
+                            <OtherListings id={4}/>
                         </div>
 
                         <div class="w-full max-w-xs text-center">
-                            <OtherListings id={id}/>
+                            <OtherListings id={5}/>
 
                         </div>
 
                         <div class="w-full max-w-xs text-center">
-                            <OtherListings id={id}/>
+                            <OtherListings id={6}/>
                         </div>
                     </div>
                 </div>
