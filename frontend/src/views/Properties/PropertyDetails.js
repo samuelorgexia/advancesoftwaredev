@@ -8,7 +8,7 @@ import { ReactComponent as BedIcon } from "../../assets/icons/bed.svg";
 import { ReactComponent as BathIcon } from "../../assets/icons/bath.svg";
 import { ReactComponent as CarIcon } from "../../assets/icons/car.svg";
 import io from 'socket.io-client'
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("http://localhost:5000");
 
 
 export default function PropertyDetails( {id} ) {
