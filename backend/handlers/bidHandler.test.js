@@ -9,13 +9,17 @@ describe("the bid handler", () => {
     beforeAll((done) => {
         const httpServer = createServer();
         io = new Server(httpServer);
+
         httpServer.listen(() => {
             const port = httpServer.address().port;
+
             clientSocket = new Client(`http://localhost:${port}`);
+
             io.on("connection", (socket) => {
                 registerBidHandler(io, socket);
                 serverSocket = socket;
             });
+            
             clientSocket.on("connect", done);
         });
     });
