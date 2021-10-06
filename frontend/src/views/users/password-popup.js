@@ -18,16 +18,19 @@ function PasswordPopup(props){
         }
       }).then(function(reponse){
         console.log(reponse);
+        if(reponse.data=="updated password"){
          props.setTrigger(false);
+        }else{
+          setError(reponse.data[0]);
+        }
       });
      
-    }else{
+    }
       if(password!=confirmPassword){
       setError("Password does not match");
-      
       } 
       
-    }
+    
   }
 
     return (props.trigger)?(

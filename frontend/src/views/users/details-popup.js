@@ -5,7 +5,7 @@ function DetailsPopup(props){
     const [firstName,setFirstName]=useState("");
     const [lastName,setLastName]=useState("");
     const [email,setEmail]=useState("");
-
+    const [emailError,setEmailError]=useState("");
     const getUser =()=>{
       console.log(localStorage.jwttoken)
       axios({
@@ -39,7 +39,11 @@ function DetailsPopup(props){
         }
       }).then(function(reponse){
         console.log(reponse);
+        if(firstName.length>0||lastName>0||email>0){
          props.setTrigger(false);
+        }else{
+          setEmailError(reponse.data[0]);
+        }
       }).catch(function(error){
         console.log(error);
       
@@ -47,8 +51,7 @@ function DetailsPopup(props){
      
     }
     useEffect(()=>{
-      getUser();
-      //test();
+     
     });
 
     return (props.trigger)?(
@@ -73,7 +76,7 @@ function DetailsPopup(props){
         Email
       </label>
       <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="" value={email} onChange={(e)=>setEmail(e.target.value)} />
-      
+      <p class="text-red-500 text-xs italic">{emailError}</p>
     </div>
     <div class="flex items-center justify-between">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={updateDetails}>

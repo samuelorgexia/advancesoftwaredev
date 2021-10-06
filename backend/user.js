@@ -5,11 +5,11 @@ const connection = require('./db');
 const bycrpt = require('bcrypt');
 const createJwt = require("./jwt/jwt-function");
 const jwtAuth = require('./jwt/jwt-auth');
-const newUserVerify=require('./middleware/newUserVerify');
+const UserVerify=require('./middleware/UserVerify');
 const { password } = require("./db.config");
 const salt=10;
 
-router.post("/signup",async (req,res)=>{
+router.post("/signup",UserVerify,async (req,res)=>{
   const {firstName,lastName,email,password}=req.body;
 try{
   
@@ -19,7 +19,8 @@ try{
   const findsql=`SELECT * FROM user WHERE email = `+connection.escape(email);
   const find =connection.query(findsql,function(error,result){
     if(error) throw error;
-    if(result==0){
+    //console.log(result.length);
+    if(result.length==0){
       const roleSql=`SELECT * FROM role WHERE role_id =`+1;
       connection.query(roleSql,function(error,result){
         if(error) throw error;
@@ -27,25 +28,17 @@ try{
         
       // add user 
         const sql=`INSERT INTO user (first_name,last_name,role,email,password) VALUES (?,?,?,?,?)`;
-      const post =connection.query(sql,[firstName,lastName,role,email,hashPassword],function(error,row){
+      connection.query(sql,[firstName,lastName,role,email,hashPassword],function(error,row){
         if(error) throw error;
         const token =createJwt(row.insertId,role);
         console.log(token);
         res.status(200).json({token});
       });
     });
-        
-     
-      
-      
- 
     }else{
-      res.send("Existing user with that emails exist");
+      res.json("Existing user with that emails exist");
     }
   });
-    
-
-
 }catch(err){
     console.log(err.message);
     res.send(err);
@@ -111,7 +104,7 @@ try{
  
 });
   // admin feature
-router.put("/update-user/:id",async(req,res)=>{
+router.put("/update-user/:id",UserVerify,async(req,res)=>{
   const {id}=req.params;
   var {firstName,lastName,email,password}=req.body;
   
@@ -177,7 +170,7 @@ router.put("/update-user/:id",async(req,res)=>{
   }
 });
   // update user for themselves when login
-router.put("/update-user-themselves",jwtAuth,async(req,res)=>{
+router.put("/update-user-themselves",UserVerify,jwtAuth,async(req,res)=>{
   var {firstName,lastName,email}=req.body;
   console.log(req.body);
   console.log(req.user.id);
@@ -196,6 +189,7 @@ router.put("/update-user-themselves",jwtAuth,async(req,res)=>{
       connection.query(updatesql,[firstName,lastName,email],function(err,result){
         if(err) throw err;
      // console.log(result);
+     res.send("Updated details");
       });
       // fill in details that body did not have 
       if(email==''){
@@ -225,7 +219,7 @@ router.put("/update-user-themselves",jwtAuth,async(req,res)=>{
       }
       });
       
-    res.send("Updated details");
+    
 
 
   }catch (err){
@@ -235,7 +229,7 @@ router.put("/update-user-themselves",jwtAuth,async(req,res)=>{
 });
 
   // update user password for themselves when log in
-  router.put("/update-user-password",jwtAuth,async(req,res)=>{
+  router.put("/update-user-password",UserVerify,jwtAuth,async(req,res)=>{
     var {password}=req.body;
     console.log(password.length);
     console.log(req.user.id);
@@ -282,32 +276,31 @@ router.post("/verify",jwtAuth,async(req,res)=>{
   }
 });
 
-router.post("/login",async(req,res)=>{
+router.post("/login",UserVerify,async(req,res)=>{
   const {email,password}=req.body;
     console.log(email);
   try{
     // get user by email
-    const getUsersql='SELECT * FROM user WHERE email= '+connection.escape(email);
-    const query=await connection.query(getUsersql,function(err,result){
+    const getUsersql='SELECT user_id,email,password,role FROM user WHERE email= '+connection.escape(email);
+    connection.query(getUsersql,function(err,result){
       if(err) throw err;
-      
+      //const queryEmail=JSON.parse(JSON.stringify(result[0].email));
+      console.log(result.length);
+      console.log(JSON.parse(JSON.stringify(result[0].email)));
+      if(result.length==1){
+         // mismatch
+        if(email==JSON.parse(JSON.stringify(result[0].email))&&!bycrpt.compareSync(password,JSON.parse(JSON.stringify(result[0].password)))){
+          res.json("Password is incorrect");
+        } 
        // if user email and password matches
         if(email==JSON.parse(JSON.stringify(result[0].email))&&bycrpt.compareSync(password,JSON.parse(JSON.stringify(result[0].password)))){
           const token =createJwt(JSON.parse(JSON.stringify(result[0].user_id)),JSON.parse(JSON.stringify(result[0].role)));
           //console.log(token);
           res.status(200).json({token});
         }
-        // mismatch
-        if(email!=JSON.parse(JSON.stringify(result[0].email))&&bycrpt.compareSync(password,JSON.parse(JSON.stringify(result[0].password)))){
-          res.send("incorrect email");
-        } 
-        if(email==JSON.parse(JSON.stringify(result[0].email))&&!bycrpt.compareSync(password,JSON.parse(JSON.stringify(result[0].password)))){
-          res.send("wrong password");
-        } 
-        
-        
-        
-        return err;
+      }else{
+        res.json("Email does not match");
+      }
     });
    
   }catch(err){

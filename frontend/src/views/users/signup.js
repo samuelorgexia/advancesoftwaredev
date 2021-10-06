@@ -5,7 +5,8 @@ const [firstName,setFirstName]=useState("");
 const [lastName,setLastName]=useState("");
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
-
+const [emailError,setEmailError]=useState("");
+const [passwordError,setPasswordError]=useState("");
   const register=()=>{
     axios({
       method:'post',
@@ -18,11 +19,19 @@ const [password,setPassword]=useState("");
       }
     }).then((response)=>{
       console.log(response);
+      if(response.data.token){
       window.location.href='/properties/all';
     localStorage.setItem("jwttoken",response.data.token);
-    
+      }
+      if(response.status==200){
+        //setEmailError(response.data);
+      }
+
     }
-    );
+    ).catch(function(error){
+      console.log(error);
+    
+  });
   }
     return(
         <div>
@@ -56,6 +65,7 @@ const [password,setPassword]=useState("");
     </div>
     <div class="md:w-2/3">
       <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email"/>
+      <p class="text-red-500 text-xs italic">{emailError}</p>
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -66,6 +76,7 @@ const [password,setPassword]=useState("");
     </div>
     <div class="md:w-2/3">
       <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
+      <p class="text-red-500 text-xs italic">{passwordError}</p>
     </div>
   </div>
 
