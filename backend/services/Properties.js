@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const db = require("../db.js");
+
 router.get("/get-property/:propertyId", (req, res) => {
   const { propertyId } = req.params;
-
   //get property details from property id
 });
 
