@@ -1,8 +1,38 @@
 import React, { useState, useEffect, Fragment } from "react";
-
+import axios from "axios";
 function Signup(){
-const [name,setName]=useState("");
+const [firstName,setFirstName]=useState("");
+const [lastName,setLastName]=useState("");
+const [email,setEmail]=useState("");
+const [password,setPassword]=useState("");
+const [emailError,setEmailError]=useState("");
+const [passwordError,setPasswordError]=useState("");
+  const register=()=>{
+    axios({
+      method:'post',
+      url:'http://localhost:5000/user/signup',
+      data:{
+        firstName:firstName,
+        lastName:lastName,
+        email:email.toLowerCase(),
+        password:password
+      }
+    }).then((response)=>{
+      console.log(response);
+      if(response.data.token){
+      window.location.href='/properties/all';
+    localStorage.setItem("jwttoken",response.data.token);
+      }
+      if(response.status==200){
+        //setEmailError(response.data);
+      }
 
+    }
+    ).catch(function(error){
+      console.log(error);
+    
+  });
+  }
     return(
         <div>
             <div>
@@ -14,7 +44,7 @@ const [name,setName]=useState("");
       </label>
     </div>
     <div class="md:w-2/3">
-      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value="Jane"/>
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value={firstName} onChange={(e)=>setFirstName(e.target.value)} placeholder="First Name"/>
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -24,7 +54,7 @@ const [name,setName]=useState("");
       </label>
     </div>
     <div class="md:w-2/3">
-      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value="Doe"/>
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value={lastName} onChange={(e)=>setLastName(e.target.value)} placeholder="Last Name"/>
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -34,7 +64,8 @@ const [name,setName]=useState("");
       </label>
     </div>
     <div class="md:w-2/3">
-      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value="JaneDoe@gmail.com"/>
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email"/>
+      <p class="text-red-500 text-xs italic">{emailError}</p>
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -44,14 +75,15 @@ const [name,setName]=useState("");
       </label>
     </div>
     <div class="md:w-2/3">
-      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="password" placeholder="Please fill in password"/>
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
+      <p class="text-red-500 text-xs italic">{passwordError}</p>
     </div>
   </div>
 
   <div class="md:flex md:items-center">
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
-      <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+      <button onClick={register} class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
         Sign Up
       </button>
     </div>
