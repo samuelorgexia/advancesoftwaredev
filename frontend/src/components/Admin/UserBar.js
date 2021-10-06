@@ -15,7 +15,7 @@ export default function UserBar(props) {
             <h3 className="px-1">{user.role}</h3>
             <h3 className="px-1">{user.email}</h3>
             <h3 className="px-1">{user.password}</h3>
-            <Button className="w-15" color="red" onClick={deleteConfirmation}>
+            <Button color="red" onClick={deleteConfirmation}>
                 Delete
             </Button>
         </div>
