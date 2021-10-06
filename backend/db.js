@@ -9,11 +9,15 @@ const connection = mysql.createConnection({
     database: dbconfig.database
   });
 
+
   // open the MySQL connection
 connection.connect(error => {
     if (error) throw error;
     console.log("Successfully connected to the database.");
-   
+   connection.query("CREATE DATABASE IF NOT EXISTS asd", function (err, result) {
+    if (err) throw err;
+    console.log("Asd Database created");
+  });
     // create tables
     const role =`
     CREATE TABLE IF NOT EXISTS  role 
