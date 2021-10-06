@@ -30,7 +30,7 @@ describe("the bid handler", () => {
     });
 
     test('should provide the current highest bid', ()=> {
-        clientSocket.on("bid:read", (arg) => {
+        clientSocket.on("bid:read", (bid) => {
             expect(bid).toBe(100000);
             done();
           });
