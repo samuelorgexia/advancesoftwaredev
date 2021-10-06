@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
-const cors = require("cors"); 
+const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
+
 app.use(cors());
 
 const server = http.createServer(app);
@@ -23,7 +24,7 @@ const io = new Server(server, {
 //   console.log(`ASD app listening on ${port}`);
 // });
 
-//listening to event 
+//listening to event
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
@@ -31,18 +32,16 @@ io.on("connection", (socket) => {
     socket.join(data);
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
-  
+
   socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data)
+    socket.to(data.room).emit("receive_message", data);
   });
 
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
-  })
+  });
 });
 
-server.listen(3001, () => {
-  console.log("Server Running")
-})
-
-
+server.listen(process.env.PORT || 3001, () => {
+  console.log("Server Running");
+});
