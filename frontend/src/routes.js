@@ -6,6 +6,7 @@ import userManagement from "./views/users/user-management";
 
 import addProperty from "./views/admin/addProperty";
 import userAdmin from "./views/admin/userAdmin";
+import propertyManagement from "./views/admin/propertyManagement"
 
 import Property from "./views/Properties/Property";
 import PropertyListings from "./views/Properties/PropertyListings";
@@ -52,8 +53,14 @@ const routes = [
   },
   {
     title: "User Admin",
-    pathname: "user-admin",
+    pathname: "/user-admin",
     component: userAdmin,
+    layout: "dashboardLayout",
+  },
+  {
+    title: "Property Management",
+    pathname: "/property-management",
+    component: propertyManagement,
     layout: "dashboardLayout",
   },
 ];
