@@ -1,30 +1,32 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
-const http = require("http");
-const { Server } = require("socket.io");
+const cors=require('cors');
+const port = process.env.PORT || 5000;
+const routes = require("./routes.js");
+const user =require('./user');
+app.use(express.static("../frontend/build"));
+const db=require('./db');
 
-app.use(cors());
+// middleware
+const corsOptions ={
+  origin:'http://localhost:5000', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+}
+app.use(cors(corsOptions)); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/user",user);
 
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
+
+
+
+const server = app.listen(port, () => {
+  console.log(`ASD app listening on ${port}`);
 });
 
-// const port = process.env.PORT || 5000;
+const io = require('socket.io').listen(server);
 
-// const routes = require("./routes.js");
-
-// app.use(express.static("../frontend/build"));
-
-// app.listen(port, () => {
-//   console.log(`ASD app listening on ${port}`);
-// });
-
-//listening to event
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
@@ -42,6 +44,4 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT || 3001, () => {
-  console.log("Server Running");
-});
+

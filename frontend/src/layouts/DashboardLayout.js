@@ -46,6 +46,39 @@ export default function DashboardLayout(props) {
 
   const [mapView, setMapView] = useState(false);
 
+  function logout(){
+    console.log("works");
+      localStorage.clear();
+      localStorage.removeItem("jwttoken")
+      window.location.href='/properties/all';
+    }
+
+  const getUser=()=>{
+    axios({
+      method:'post',
+      url:'http://localhost:5000/user/verify',
+      headers:{
+      jwt:localStorage.getItem('jwttoken'),
+      }
+    }).then((response)=>{
+      console.log(response);
+      if(response.data=true){
+        // remove sign up link
+        navigation.splice(4,1);
+        // add user management settings 
+      userNavigation.push(  { name: "Settings", href: "/user-manage" });
+      userNavigation.push(  {name:"Add Listing",href:"/add-property"});
+      userNavigation.push({ name: "Sign out", href:"#",onClick:()=>{ window.location.href='/properties/all'; } });
+      userNavigation.splice(0,1);
+      }
+      
+    })
+    .catch(function(error){
+      console.log(error);
+      localStorage.clear();
+    });
+  }
+
   const getRoutes = (routes) => {
     return routes.map((route, index) => {
       if (route.layout === "dashboardLayout") {
