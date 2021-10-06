@@ -1,4 +1,4 @@
-import React,{useState,useRef,Fragment,useEffect} from 'react';
+import React,{useState,useRef,Fragment} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,21 +10,17 @@ import { ExclamationIcon } from '@heroicons/react/outline'
 import PasswordPopup from './password-popup';
 import DetailsPopup from './details-popup';
 import BudgetPopup from './budget-popup';
-import axios from 'axios';
 
  function Usermanagement(){ 
    const [passpopup,setpassPopup]=useState(false);
    const [dePopup,setdePopup]=useState(false);
    const [budPopup,setbudPopup]=useState(false);
    const [open, setOpen] = useState(false);
-  const [name,setName]=useState("");
-  const cancelButtonRef = useRef(null)
 
-    
+  const cancelButtonRef = useRef(null)
     return(
        
         <div >
-          
              <ul >
         <li class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><button  onClick={()=>setpassPopup(true)} >Change Password</button></li>
         <li class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><button onClick={()=>setdePopup(true)}  >Change Details</button></li>
