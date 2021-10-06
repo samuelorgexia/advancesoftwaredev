@@ -15,7 +15,7 @@ import { MapIcon, ViewListIcon } from "@heroicons/react/solid";
 const now = Date.now();
 
 export default function PropertyListings(props) {
-  const { setOverrideTitle, match, setHeaderFeature, mapView } = props;
+  const { match, mapView } = props;
 
   const [propertyPreview, setPropertyPreview] = useState(false);
   const [currentPreviewId, setCurrentPreviewId] = useState(null);
@@ -38,18 +38,9 @@ export default function PropertyListings(props) {
   useEffect(() => {
     if (["all", "past", "upcoming", "live"].includes(match.params.mode)) {
       const newMode = match.params.mode;
-      setOverrideTitle(
-        `${newMode[0].toUpperCase() + newMode.slice(1)} ${
-          newMode === "all" ? "properties" : "auctions"
-        }`
-      );
+
       setMode(newMode);
     }
-
-    return () => {
-      //reset override title
-      setOverrideTitle(null);
-    };
   }, [match.params.mode]);
 
   const handlePropertyPreview = (propertyId) => {
