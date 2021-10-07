@@ -16,7 +16,6 @@ export default function PropertyCard(props) {
     onPropertyPreview(property);
   };
 
-  console.log(history);
   const goToAuction = () => {
     history.push("/auction/" + property.id);
     //window.alert(`propertyId - ${property.id}`);
