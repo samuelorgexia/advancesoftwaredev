@@ -59,7 +59,9 @@ module.exports=function(req,res,next){
     }
     if(req.path=="/update-user-themselves"||req.path=="/update-user/:id"){
        // checkEmailLength(email);
+       if(email.length>0){
         verifyEmail(email);
+       }
     }
 
 errorOutput(errorOut);
