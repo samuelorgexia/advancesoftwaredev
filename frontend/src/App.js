@@ -5,8 +5,6 @@ import {
   Switch,
 } from "react-router-dom";
 
-import { createBrowserHistory } from "history";
-
 import DashboardLayout from "./layouts/DashboardLayout.js";
 import AuthLayout from "./layouts/AuthLayout.js";
 import routes from "./routes";
@@ -16,8 +14,6 @@ import axios from "axios";
 
 // import io from 'socket.io-client'
 // const socket = io.connect("http://localhost:3001");
-
-const history = createBrowserHistory();
 
 function App(props) {
   /*const getRoutes = () => {
@@ -36,7 +32,7 @@ function App(props) {
   const logout = () => {
     console.log("works");
     setAuthenticated(false);
-    history.push("/properties/all");
+    window.location.href = "/properties/all";
     localStorage.clear();
     localStorage.removeItem("jwttoken");
   };
@@ -67,7 +63,7 @@ function App(props) {
   }, []);
 
   return (
-    <Router history={history}>
+    <Router>
       <Switch>
         <Route
           exact
