@@ -13,7 +13,7 @@ export default function PropertyCard(props) {
   const [timeFormat, setTimeFormat] = useState("");
 
   const handlePropertyPreview = () => {
-    onPropertyPreview(property.id);
+    onPropertyPreview(property);
   };
 
   const goToAuction = () => {

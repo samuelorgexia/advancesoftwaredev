@@ -7,14 +7,46 @@ import { CarouselData } from "../../components/ImageCarousel/CarouselData.js";
 
 export default function Property(props) {
   // gets the preview variable from props
-  const { preview, propertyId, match } = props;
-  const id = propertyId || match.params.id;
-  const property = PropertyData[id];
+  const { preview, propertyPreview, match } = props;
+  const id = propertyPreview
+    ? propertyPreview.id || match.params.id
+    : match.params.id;
+
+  const [property, setProperty] = useState(propertyPreview || null);
+
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!id) {
+      setError(true);
+    } else if (!propertyPreview || !property) {
+      fetch(`/api/properties/get-property/${id}`)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+          setProperty(result);
+        })
+        .catch((error) => {
+          console.error("Something went wrong");
+          console.error(error);
+          window.alert("Something went wrong – " + error.message);
+          setError(true);
+        });
+    }
+  }, []);
+
+  if (error) {
+    return <div>error</div>;
+  }
+
+  if (!property) {
+    return <div>loading</div>;
+  }
 
   if (preview) {
     return (
       <>
-        <h1> {propertyId || match.params.id}</h1>
+        <h1>{id}</h1>
         <div className="prose">
           <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg" />
 
@@ -97,7 +129,7 @@ export default function Property(props) {
   //shows when not preview
   return (
     <>
-      <PropertyDetails id={propertyId || match.params.id} />
+      <PropertyDetails id={id || match.params.id} property={property} />
     </>
   );
 }

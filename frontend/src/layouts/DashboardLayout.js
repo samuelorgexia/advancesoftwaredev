@@ -101,7 +101,6 @@ export default function DashboardLayout(props) {
   };
 
   const getActiveRoute = (routes) => {
-    console.log(routes);
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].pathname === props.match.path) {
         return routes[i];

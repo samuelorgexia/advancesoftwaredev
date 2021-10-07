@@ -16,7 +16,7 @@ connection.connect((error) => {
 
   // create tables
   const role = `
-    CREATE TABLE IF NOT EXISTS  role 
+    CREATE TABLE IF NOT EXISTS role 
     (role_id SERIAL,
       role_name VARCHAR(40),
       PRIMARY KEY(role_id)
@@ -58,15 +58,18 @@ connection.connect((error) => {
         features_bed INT(255),
         features_bath INT(255),
         features_car INT(255),
-        coords_long DECIMAL(10,10),
-        coords_lat DECIMAL(10,10),
+        coords_long DECIMAL(65,30),
+        coords_lat DECIMAL(65,30),
         property_size FLOAT(24),
+        agent VARCHAR(255),
         auctioneer VARCHAR(255),
         auction_location VARCHAR(255),
-        images VARCHAR(255),
+        thumbnail TEXT,
+        images TEXT,
         auction_live BOOL,
         auction_completed BOOL,
-        auction_date_time INT(255),
+        auction_completed_date_time BIGINT(255),
+        auction_date_time BIGINT(255),
         PRIMARY KEY (property_id)
         )ENGINE=INNODB
        `;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import propertyData from "./PropertyData.json";
+//import propertyData from "./PropertyData.json";
 
 import Properties from "../../components/Properties/Properties.js";
 import Slideover from "../../components/Slideover/Slideover.js";
@@ -12,28 +12,45 @@ import Button from "../../components/Buttons/Button";
 
 import { MapIcon, ViewListIcon } from "@heroicons/react/solid";
 
-const now = Date.now();
-
 export default function PropertyListings(props) {
   const { match, mapView } = props;
 
+  const coords = {
+    lat: -33.8188484,
+    lng: 151.0619369,
+  };
+
+  const [propertyData, setPropertyData] = useState(null);
+
   const [propertyPreview, setPropertyPreview] = useState(false);
-  const [currentPreviewId, setCurrentPreviewId] = useState(null);
+  const [currentPreview, setCurrentPreview] = useState(null);
 
   const [currentTime, setCurrentTime] = useState(Date.now());
   const [mode, setMode] = useState(null);
 
-  const inMins = (min) => now + 1000 * 60 * min;
-  const inHours = (hours) => now + 1000 * 60 * 60 * hours;
-
-  const auctionTimes = [
-    inMins(0),
-    inMins(1),
-    inMins(1),
-    inMins(13),
-    inMins(56),
-    inHours(3),
-  ];
+  useEffect(() => {
+    if (coords) {
+      fetch("/api/properties/list-properties", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          coords: {
+            long: coords.lng,
+            lat: coords.lat,
+          },
+        }),
+      })
+        .then((response) => response.json())
+        .then((result) => setPropertyData(result))
+        .catch((err) => {
+          console.error("Something went wrong");
+          console.error(err);
+          window.alert("Something went wrong – " + err.message);
+        });
+    }
+  }, [coords.lat, coords.lng]);
 
   useEffect(() => {
     if (["all", "past", "upcoming", "live"].includes(match.params.mode)) {
@@ -43,8 +60,8 @@ export default function PropertyListings(props) {
     }
   }, [match.params.mode]);
 
-  const handlePropertyPreview = (propertyId) => {
-    setCurrentPreviewId(propertyId);
+  const handlePropertyPreview = (property) => {
+    setCurrentPreview(property);
     setPropertyPreview(true);
   };
 
@@ -56,24 +73,27 @@ export default function PropertyListings(props) {
     };
   }, []);
 
-  const properties = Object.values(propertyData)
-    .filter((property) => {
-      if (mode === "past") {
-        return !!property.auctionCompleted;
-      } else if (mode === "upcoming") {
-        return !property.auctionLive && !property.auctionCompleted;
-      } else if (mode === "live") {
-        return property.auctionLive;
-      }
+  const properties = propertyData
+    ? propertyData.filter((property) => {
+        if (mode === "past") {
+          return !!property.auctionCompleted;
+        } else if (mode === "upcoming") {
+          return !property.auctionLive && !property.auctionCompleted;
+        } else if (mode === "live") {
+          return property.auctionLive;
+        }
 
-      return true;
-    })
-    .map((property, index) => {
-      return {
-        ...property,
-        auctionTime: auctionTimes[index],
-      };
-    });
+        return true;
+      })
+    : null;
+
+  if (!properties) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (properties.length === 0) {
+    return <div>No results</div>;
+  }
 
   return (
     <>
@@ -82,6 +102,7 @@ export default function PropertyListings(props) {
           onPropertyPreview={handlePropertyPreview}
           properties={properties}
           currentTime={currentTime}
+          centre={coords}
         />
       ) : (
         <Properties
@@ -97,7 +118,7 @@ export default function PropertyListings(props) {
         setOpen={setPropertyPreview}
         title="Property Preview"
       >
-        <Property {...props} preview={true} propertyId={currentPreviewId} />
+        <Property {...props} preview={true} propertyPreview={currentPreview} />
       </Slideover>
     </>
   );

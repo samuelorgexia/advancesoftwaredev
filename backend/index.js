@@ -13,7 +13,6 @@ const io = new Server(server, {
 });
 
 const routes = require("./routes.js");
-const user = require("./user");
 app.use(express.static("../frontend/build"));
 const db = require("./db");
 
@@ -26,7 +25,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/user", user);
+
+app.use("/api", routes);
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
