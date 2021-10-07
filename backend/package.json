@@ -20,6 +20,7 @@
     "mysql": "^2.18.1",
     "mysql-await": "^2.1.8",
     "nodemon": "^2.0.12",
+    "socket.io-client": "^4.2.0",
     "validator": "^13.6.0",
     "socket.io": "^4.2.0"
   },
