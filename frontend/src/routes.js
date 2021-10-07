@@ -5,8 +5,9 @@ import signup from "./views/users/signup";
 import userManagement from "./views/users/user-management";
 
 import addProperty from "./views/admin/addProperty";
-import userAdmin from "./views/admin/userAdmin";
+import userAdmin from "./views/admin/UserAdmin";
 import propertyManagement from "./views/admin/propertyManagement"
+import updateUserAdmin from "./views/admin/UpdateUserAdmin";
 
 import Property from "./views/Properties/Property";
 import PropertyListings from "./views/Properties/PropertyListings";
@@ -74,6 +75,12 @@ const routes = [
     title: "Property Management",
     pathname: "/property-management",
     component: propertyManagement,
+    layout: "dashboardLayout",
+  },
+  {
+    title: "Update User Admin",
+    pathname: "/update-user-admin/:id",
+    component: updateUserAdmin,
     layout: "dashboardLayout",
   },
 ];
