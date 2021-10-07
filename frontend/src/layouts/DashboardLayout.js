@@ -17,6 +17,21 @@ export default function DashboardLayout(props) {
 
   const [mapView, setMapView] = useState(false);
 
+  const [coords, setCoords] = useState(null);
+  const [handlingSearch, setHandlingSearch] = useState(false);
+
+  const handleSearch = (object) => {
+    setHandlingSearch(true);
+    setCoords(object.coords);
+  };
+
+  useEffect(() => {
+    if (handlingSearch) {
+      setMapView(false);
+      setHandlingSearch(false);
+    }
+  }, [handlingSearch]);
+
   const user = {
     name: "Tom Cook",
     email: "tom@example.com",
@@ -41,6 +56,12 @@ export default function DashboardLayout(props) {
     },
   ];
 
+  //meadowbank
+  const defaultCoords = {
+    lat: false ? -33.8157836 : null,
+    lng: false ? 151.0896983 : null,
+  };
+
   const getRoutes = (routes) => {
     return routes.map((route, index) => {
       if (route.layout === "dashboardLayout") {
@@ -56,6 +77,7 @@ export default function DashboardLayout(props) {
                   mapView={mapView}
                   authenticated={authenticated}
                   setAuthenticated={setAuthenticated}
+                  coords={coords || defaultCoords}
                 />
               );
             }}
@@ -98,6 +120,7 @@ export default function DashboardLayout(props) {
         }
         userNavigation={userNavigation}
         authenticated={authenticated}
+        onSearch={handleSearch}
       />
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
