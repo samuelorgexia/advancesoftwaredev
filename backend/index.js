@@ -16,6 +16,7 @@ const io = new Server(server, {
 const routes = require("./routes.js");
 app.use(express.static("../frontend/build"));
 const db = require("./db");
+const registerBidHandler = require('./handlers/bidHandler');
 
 // middleware
 const corsOptions = {
@@ -31,6 +32,8 @@ app.use("/api", routes);
 app.use("/user",user);
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
+
+  registerBidHandler(io, socket);
 
   socket.on("join_room", (data) => {
     socket.join(data);
