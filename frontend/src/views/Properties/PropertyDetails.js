@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import Carousel from "../../components/ImageCarousel/Carousel.js";
 import { Link } from "react-router-dom";
 import LiveChat from "../../components/LiveChat/LiveChat.js";
-import PropertyData from "./PropertyData.json";
 import OtherListings from "./OtherListings.js";
 import { ReactComponent as BedIcon } from "../../assets/icons/bed.svg";
 import { ReactComponent as BathIcon } from "../../assets/icons/bath.svg";
@@ -54,20 +53,19 @@ export default function PropertyDetails({ id, property }) {
       <div class="bg-white shadow overflow-hidden sm:rounded-lg my-10">
         <div class="px-4 py-5 sm:px-6 border-b border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-lg leading-6 font-medium text-gray-900">
-            {PropertyData[id].address}
+            {property.address}
             <br></br>
             <h3 class="mt-1 max-w-2xl text-sm text-black-500">
-              {PropertyData[id].suburb}, {PropertyData[id].state}{" "}
-              {PropertyData[id].postcode}
+              {property.suburb}, {property.state} {property.postcode}
             </h3>
           </dt>
           <dd class="text-sm font-medium text-black-500">
             <div className="flex flex-row items-center">
-              <div className="pr-1 py-0">{PropertyData[id].features.bed}</div>
+              <div className="pr-1 py-0">{property.features.bed}</div>
               <BedIcon />
-              <div className="pl-4 pr-1">{PropertyData[id].features.bath}</div>
+              <div className="pl-4 pr-1">{property.features.bath}</div>
               <BathIcon />
-              <div className="pl-4 pr-1">{PropertyData[id].features.car}</div>
+              <div className="pl-4 pr-1">{property.features.car}</div>
               <CarIcon />
             </div>
           </dd>
@@ -79,21 +77,21 @@ export default function PropertyDetails({ id, property }) {
                 Display Location
                 <br></br>
                 <h3 class="text-gray-500">
-                  {PropertyData[id].address}, {PropertyData[id].suburb},{" "}
-                  {PropertyData[id].state} {PropertyData[id].postcode}
+                  {property.address}, {property.suburb}, {property.state}{" "}
+                  {property.postcode}
                 </h3>
               </dt>
               <dd class="text-sm font-medium text-black-500">
                 Size
                 <h3 class="text-gray-500">
-                  {PropertyData[id].size} m<sup>2</sup>
+                  {property.size} m<sup>2</sup>
                 </h3>
               </dd>
             </div>
             <div class="border-b border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">Price Estimate</dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {PropertyData[id].price}
+                {property.price}
               </dd>
             </div>
             <div class="border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
