@@ -1,20 +1,18 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
-
+import { Route, Redirect } from "react-router-dom";
 
 import DashboardLayout from "./layouts/DashboardLayout.js";
 import AuthLayout from "./layouts/AuthLayout.js";
 import routes from "./routes";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
 
 // import io from 'socket.io-client'
 // const socket = io.connect("http://localhost:3001");
 
-function App() {
+function App(props) {
+  const { history } = props;
+
   /*const getRoutes = () => {
     return routes.map((route) => {
       if(route.layout === "dashboardLayout"){
@@ -26,27 +24,67 @@ function App() {
     });
   };*/
 
+  const [authenticated, setAuthenticated] = useState(false);
+
+  const logout = () => {
+    console.log("works");
+    setAuthenticated(false);
+    history.push("/properties/all");
+    localStorage.clear();
+    localStorage.removeItem("jwttoken");
+  };
+
+  const getUser = (token) => {
+    axios({
+      method: "post",
+      url: "/api/user/verify",
+      headers: {
+        jwt: token,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          setAuthenticated(true);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        localStorage.clear();
+      });
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwttoken");
+    if (token) getUser(token);
+  }, []);
+
   return (
-    <Router>
-      <Switch>
-        <Route
-          exact
-          path={routes
-            .filter((route) => route.layout === "dashboardLayout")
-            .map((route) => route.pathname)}
-          render={(rest) => <DashboardLayout {...rest} />}
-        />
-        <Route
-          exact
-          path={routes
-            .filter((route) => route.layout === "authLayout")
-            .map((route) => route.pathname)}
-          render={(rest) => <AuthLayout {...rest} />}
-        />
-        <Redirect from="/properties" to="/properties/all" />
-        <Redirect from="/" to="/properties/all" />
-      </Switch>
-    </Router>
+    <>
+      <Route
+        exact
+        path={routes
+          .filter((route) => route.layout === "dashboardLayout")
+          .map((route) => route.pathname)}
+        render={(rest) => (
+          <DashboardLayout
+            {...rest}
+            logout={logout}
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={routes
+          .filter((route) => route.layout === "authLayout")
+          .map((route) => route.pathname)}
+        render={(rest) => <AuthLayout {...rest} />}
+      />
+      <Redirect from="/properties" to="/properties/all" />
+      <Redirect from="/" to="/properties/all" />
+    </>
   );
 
   /*return (
