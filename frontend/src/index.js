@@ -8,15 +8,9 @@ import "./assets/css/chat.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <App />
-      </Switch>
-    </Router>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

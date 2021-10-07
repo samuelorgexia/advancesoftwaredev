@@ -1,4 +1,11 @@
-import { Route, Redirect } from "react-router-dom";
+import {
+  Route,
+  Redirect,
+  BrowserRouter as Router,
+  Switch,
+} from "react-router-dom";
+
+import { createBrowserHistory } from "history";
 
 import DashboardLayout from "./layouts/DashboardLayout.js";
 import AuthLayout from "./layouts/AuthLayout.js";
@@ -10,9 +17,9 @@ import axios from "axios";
 // import io from 'socket.io-client'
 // const socket = io.connect("http://localhost:3001");
 
-function App(props) {
-  const { history } = props;
+const history = createBrowserHistory();
 
+function App(props) {
   /*const getRoutes = () => {
     return routes.map((route) => {
       if(route.layout === "dashboardLayout"){
@@ -60,31 +67,33 @@ function App(props) {
   }, []);
 
   return (
-    <>
-      <Route
-        exact
-        path={routes
-          .filter((route) => route.layout === "dashboardLayout")
-          .map((route) => route.pathname)}
-        render={(rest) => (
-          <DashboardLayout
-            {...rest}
-            logout={logout}
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
-        )}
-      />
-      <Route
-        exact
-        path={routes
-          .filter((route) => route.layout === "authLayout")
-          .map((route) => route.pathname)}
-        render={(rest) => <AuthLayout {...rest} />}
-      />
-      <Redirect from="/properties" to="/properties/all" />
-      <Redirect from="/" to="/properties/all" />
-    </>
+    <Router history={history}>
+      <Switch>
+        <Route
+          exact
+          path={routes
+            .filter((route) => route.layout === "dashboardLayout")
+            .map((route) => route.pathname)}
+          render={(rest) => (
+            <DashboardLayout
+              {...rest}
+              logout={logout}
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={routes
+            .filter((route) => route.layout === "authLayout")
+            .map((route) => route.pathname)}
+          render={(rest) => <AuthLayout {...rest} />}
+        />
+        <Redirect from="/properties" to="/properties/all" />
+        <Redirect from="/" to="/properties/all" />
+      </Switch>
+    </Router>
   );
 
   /*return (
