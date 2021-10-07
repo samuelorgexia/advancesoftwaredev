@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import ScrollToBottom from 'react-scroll-to-bottom';
 
-function LiveChat( {socket, username, room}) {
+function LiveChat( {socket, username, room} ) {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
 

@@ -107,6 +107,7 @@
 
 #you .message-content {
   justify-content: flex-start;
+  background-color:#70787a;
 }
 
 #you .message-meta {
@@ -120,7 +121,7 @@
 
 #other .message-content {
   justify-content: flex-end;
-  background-color: cornflowerblue;
+  background-color: rgb(95, 134, 207);
 }
 
 #other .message-meta {
