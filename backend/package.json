@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test-ci": "node_modules/.bin/jest --ci --reporters=jest-junit --reporters=default",
     "node": "nodemon ."
   },
   "author": "",
