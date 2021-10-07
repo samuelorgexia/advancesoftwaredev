@@ -25,6 +25,13 @@
   },
   "homepage": "https://github.com/samuelorgexia/advancesoftwaredev#readme",
   "dependencies": {
-    "concurrently": "^6.2.1"
+    "concurrently": "^6.2.1",
+    "react-scroll-to-bottom": "^4.1.2",
+    "socket.io": "^4.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.7",
+    "postcss": "^7.0.38",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
   }
 }

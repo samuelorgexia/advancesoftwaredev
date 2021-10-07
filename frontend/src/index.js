@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 //tailwind css
 import "./assets/css/output.css";
+import "./assets/css/chat.css";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

@@ -1,3 +1,5 @@
+//made redundant
+
 const admin = require("firebase-admin");
 
 const serviceAccount = require("../config/group-1-asd-firebase-adminsdk-g56qa-c8daa96873.json");

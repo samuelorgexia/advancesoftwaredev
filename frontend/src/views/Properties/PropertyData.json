@@ -2,6 +2,7 @@
   "1": {
     "id": 1,
     "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
     "state": "NSW",
@@ -12,6 +13,21 @@
       "bath": 1,
       "car": 1
     },
+    "coords": {
+      "lat": -33.81781802979944,
+      "long": 151.08774533246867
+    },
+    "size": 235,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "image": [
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://images.unsplash.com/photo-1607582544644-f1da2a004994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80",
+      "https://images.unsplash.com/photo-1591247378418-c77f1532d2f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1610276173132-c47d148ab626?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1559599238-308793637427?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80"
+    ],
     "auctionLive": false,
     "auctionTime": null,
     "auctionCompleted": {
@@ -21,6 +37,7 @@
   "2": {
     "id": 2,
     "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
     "state": "NSW",
@@ -31,9 +48,20 @@
       "bath": 1,
       "car": 1
     },
+    "size": 240,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "image": [
+      "https://images.unsplash.com/photo-1607582544644-f1da2a004994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://images.unsplash.com/photo-1591247378418-c77f1532d2f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1610276173132-c47d148ab626?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1559599238-308793637427?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80"
+    ],
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.8183056482321,
+      "long": 151.0658158673482
     },
     "auctionLive": true,
     "auctionTime": null
@@ -41,6 +69,7 @@
   "3": {
     "id": 3,
     "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
     "state": "NSW",
@@ -51,9 +80,20 @@
       "bath": 1,
       "car": 1
     },
+    "size": 235,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "image": [
+      "https://images.unsplash.com/photo-1607582544644-f1da2a004994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://images.unsplash.com/photo-1610276173132-c47d148ab626?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1591247378418-c77f1532d2f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1559599238-308793637427?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80"
+    ],
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.81276436592353,
+      "long": 151.08128921214572
     },
     "auctionLive": false,
     "auctionTime": null
@@ -61,6 +101,7 @@
   "4": {
     "id": 4,
     "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
     "state": "NSW",
@@ -71,9 +112,20 @@
       "bath": 1,
       "car": 1
     },
+    "size": 235,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "image": [
+      "https://images.unsplash.com/photo-1591247378418-c77f1532d2f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://images.unsplash.com/photo-1607582544644-f1da2a004994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80",
+      "https://images.unsplash.com/photo-1610276173132-c47d148ab626?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1559599238-308793637427?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80"
+    ],
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.813916982211616,
+      "long": 151.06192085296811
     },
     "auctionLive": false,
     "auctionTime": null
@@ -81,6 +133,7 @@
   "5": {
     "id": 5,
     "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
     "state": "NSW",
@@ -91,9 +144,20 @@
       "bath": 1,
       "car": 1
     },
+    "size": 235,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "image": [
+      "https://images.unsplash.com/photo-1610276173132-c47d148ab626?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://images.unsplash.com/photo-1607582544644-f1da2a004994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80",
+      "https://images.unsplash.com/photo-1591247378418-c77f1532d2f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1559599238-308793637427?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80"
+    ],
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.81959117442473,
+      "long": 151.06410846378432
     },
     "auctionLive": false,
     "auctionTime": null
@@ -101,6 +165,7 @@
   "6": {
     "id": 6,
     "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
     "address": "304 Bowden street",
     "suburb": "Meadowbank",
     "state": "NSW",
@@ -111,9 +176,20 @@
       "bath": 1,
       "car": 1
     },
+    "size": 235,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "image": [
+      "https://images.unsplash.com/photo-1559599238-308793637427?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://images.unsplash.com/photo-1607582544644-f1da2a004994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80",
+      "https://images.unsplash.com/photo-1591247378418-c77f1532d2f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1610276173132-c47d148ab626?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80"
+    ],
     "coords": {
-      "long": null,
-      "lat": null
+      "lat": -33.81577886802395,
+      "long": 151.07819454318624
     },
     "auctionLive": false,
     "auctionTime": null
