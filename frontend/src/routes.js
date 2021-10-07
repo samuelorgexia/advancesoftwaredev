@@ -57,16 +57,4 @@ const routes = [
     layout: "dashboardLayout",
   },
 ];
-
-/*function routes() {
-  return (
-    <div>
-      <Switch>
-        <Route exact path="/login" component={login}></Route>
-        <Route exact path="/user-manage" component={userManagement}></Route>
-      </Switch>
-    </div>
-  );
-}*/
-
 export default routes;
