@@ -9,6 +9,8 @@ const connection = mysql.createConnection({
   database: dbconfig.database,
 });
 
+const PropertyData = require("./core/PropertyData.json");
+
 // open the MySQL connection
 connection.connect((error) => {
   if (error) throw error;
@@ -92,6 +94,79 @@ connection.connect((error) => {
   connection.query(properties, function (err, result) {
     if (err) throw err;
     console.log("properties table created");
+
+    console.log("Adding properties...");
+
+    const properties = Object.values(PropertyData);
+
+    const now = Date.now();
+
+    const inMins = (min) => now + 1000 * 60 * min;
+    const inHours = (hours) => now + 1000 * 60 * 60 * hours;
+
+    const auctionTimes = [
+      inMins(0),
+      inMins(1),
+      inMins(1),
+      inMins(13),
+      inMins(56),
+      inHours(3),
+    ];
+
+    const sql = `REPLACE INTO properties (property_id, title,
+    price,
+    address,
+    suburb,
+    state,
+    postcode,
+    description,
+    features_bed,
+    features_bath,
+    features_car,
+    coords_long,
+    coords_lat,
+    property_size,
+    agent,
+    auctioneer,
+    auction_location,
+    thumbnail,
+    images,
+    auction_live,
+    auction_completed,
+    auction_completed_date_time,
+    auction_date_time) VALUES ?`;
+
+    const values = properties.map((property, index) => {
+      return [
+        property.id,
+        property.title,
+        property.price,
+        property.address,
+        property.suburb,
+        property.state,
+        property.postcode,
+        property.description,
+        property.features.bed,
+        property.features.bath,
+        property.features.car,
+        property.coords.long,
+        property.coords.lat,
+        property.size,
+        property.agent,
+        property.auctioneer,
+        property.auctionLocation,
+        property.thumbnail || "",
+        property.image ? property.image.join(",") : "",
+        property.auctionLive,
+        !!property.auctionCompleted,
+        property.auctionCompleted ? property.auctionCompleted.date : null,
+        auctionTimes[index] || now,
+      ];
+    });
+
+    connection.query(sql, [values], (err, result) => {
+      console.log("prepopulated/updated properties table");
+    });
   });
 
   // insert role data

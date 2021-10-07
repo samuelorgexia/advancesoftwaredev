@@ -71,7 +71,7 @@ export default function PropertyMap(props) {
                   text={text}
                   onClick={() =>
                     type === "upcoming"
-                      ? onPropertyPreview(property.id)
+                      ? onPropertyPreview(property)
                       : window.alert("auction id - " + property.id)
                   }
                 />

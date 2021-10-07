@@ -23,7 +23,7 @@ const addProperties = async () => {
   try {
     //await db.createQuery("CREATE DATABASE asd");
 
-    const sql = `INSERT INTO properties (title,
+    const sql = `REPLACE INTO properties (property_id, title,
     price,
     address,
     suburb,
@@ -47,8 +47,8 @@ const addProperties = async () => {
     auction_date_time) VALUES ?`;
 
     const values = properties.map((property, index) => {
-      console.log(property.agent);
       return [
+        property.id,
         property.title,
         property.price,
         property.address,
