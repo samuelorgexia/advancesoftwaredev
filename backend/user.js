@@ -39,7 +39,7 @@ router.post("/signup", UserVerify, async (req, res) => {
           );
         });
       } else {
-        res.json("Existing user with that emails exist");
+        res.sendStatus(400).json("Existing user with that emails exist");
       }
     });
   } catch (err) {
@@ -283,7 +283,7 @@ router.put("/update-user-password", UserVerify, jwtAuth, async (req, res) => {
     console.log(err.message);
   }
 });
-
+ // admin
 router.delete("/delete-user/:id", (req, res) => {
   const { id } = req.params;
   try {

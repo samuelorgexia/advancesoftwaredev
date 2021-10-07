@@ -5,11 +5,23 @@ const testData=[
     {firstName:"Samuel",lastName:"Li",email:"@gmail.com",password:"123"},
     {firstName:"",lastName:"",email:"",password:""},
 ];
+const supertest =require ('supertest');
+const index=require('../index'); 
+/*
+describe("test sign up",()=>{
 
-for(var i in testData){
-    console.log(testData[i]);
-}
-
+})
+*/
+test("should respond with a 200 status code", async () => {
+    const response = await request(index).post("user/signup").send({
+      firstName: "test",
+      lastName:"la",
+      email:"123",
+      password: "password"
+    })
+    expect(response.statusCode).toBe(200)
+  })
+  
 
 describe('Sample Test', () => {
     it('should test that true === true', () => {

@@ -91,6 +91,7 @@ connection.connect((error) => {
     console.log("user Table created");
   });
 
+  
   connection.query(realestate, function (err, result) {
     if (err) throw err;
     console.log("auctioner table created");

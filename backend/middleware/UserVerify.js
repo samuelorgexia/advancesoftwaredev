@@ -1,4 +1,5 @@
 const validator=require('validator');
+const passValidator=require('password-validator');
 module.exports=function(req,res,next){
     const {firstName,lastName,email,password}=req.body;
     var errorOut=[];
@@ -27,9 +28,16 @@ module.exports=function(req,res,next){
         }
     }
     function checkPassLength(password){
-        if(password.length==''){
+        if(password.length==0){
           errorOut.push("Password is not filled in");
 
+        }
+    }
+    function passwordValid(password){
+        const validation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        const valid=validation.isStrongPassword(password,[{minLength:6}]);
+        if(validation.isStrongPassword()){
+            errorOut.push("Password must be 6 to 20 character with which contains a number and upper and lower case letters");
         }
     }
 
@@ -44,6 +52,7 @@ module.exports=function(req,res,next){
        checkFirstNameLength(firstName);
       checkLastNameLength(lastName);
       checkPassLength(password);
+      passwordValid(password);
     
     }
 
@@ -55,7 +64,7 @@ module.exports=function(req,res,next){
 
     if(req.path=="/update-user-password"){
         checkPassLength(password);
-    
+        passwordValid(password);
     }
     if(req.path=="/update-user-themselves"||req.path=="/update-user/:id"){
        // checkEmailLength(email);
