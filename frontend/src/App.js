@@ -1,17 +1,21 @@
 import {
+  Route,
+  Redirect,
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  Redirect,
 } from "react-router-dom";
 
 import DashboardLayout from "./layouts/DashboardLayout.js";
 import AuthLayout from "./layouts/AuthLayout.js";
-
 import routes from "./routes";
+import { useEffect, useState } from "react";
 
-function App() {
+import axios from "axios";
+
+// import io from 'socket.io-client'
+// const socket = io.connect("http://localhost:3001");
+
+function App(props) {
   /*const getRoutes = () => {
     return routes.map((route) => {
       if(route.layout === "dashboardLayout"){
@@ -23,6 +27,41 @@ function App() {
     });
   };*/
 
+  const [authenticated, setAuthenticated] = useState(false);
+
+  const logout = () => {
+    console.log("works");
+    setAuthenticated(false);
+    window.location.href = "/properties/all";
+    localStorage.clear();
+    localStorage.removeItem("jwttoken");
+  };
+
+  const getUser = (token) => {
+    axios({
+      method: "post",
+      url: "/api/user/verify",
+      headers: {
+        jwt: token,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          setAuthenticated(true);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        localStorage.clear();
+      });
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwttoken");
+    if (token) getUser(token);
+  }, []);
+
   return (
     <Router>
       <Switch>
@@ -31,7 +70,14 @@ function App() {
           path={routes
             .filter((route) => route.layout === "dashboardLayout")
             .map((route) => route.pathname)}
-          render={(rest) => <DashboardLayout {...rest} />}
+          render={(rest) => (
+            <DashboardLayout
+              {...rest}
+              logout={logout}
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
         />
         <Route
           exact

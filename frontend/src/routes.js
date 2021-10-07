@@ -10,6 +10,7 @@ import propertyManagement from "./views/admin/propertyManagement"
 
 import Property from "./views/Properties/Property";
 import PropertyListings from "./views/Properties/PropertyListings";
+import Auction from "./views/Auction/Auction";
 
 const routes = [
   {
@@ -28,7 +29,13 @@ const routes = [
     layout: "dashboardLayout",
   },
   {
-    title: "Properties",
+    title: {
+      all: "All properties",
+      upcoming: "Upcoming auctions",
+      live: "Live auctions",
+      past: "Past auctions",
+    },
+    titleKey: "mode",
     pathname: "/properties/:mode",
     component: PropertyListings,
     layout: "dashboardLayout",
@@ -44,6 +51,12 @@ const routes = [
     pathname: "/property/:id",
     component: Property,
     layout: "dashboardLayout",
+  },
+  {
+    title: "Live Auction",
+    pathname: "/auction/:id",
+    component: Auction,
+    layout: "dashboardLayout"
   },
   {
     title: "Add property",
@@ -64,16 +77,4 @@ const routes = [
     layout: "dashboardLayout",
   },
 ];
-
-/*function routes() {
-  return (
-    <div>
-      <Switch>
-        <Route exact path="/login" component={login}></Route>
-        <Route exact path="/user-manage" component={userManagement}></Route>
-      </Switch>
-    </div>
-  );
-}*/
-
 export default routes;

@@ -1,10 +1,12 @@
-const jwt =require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
-function createJwt(id,role){
-    console.log(id);
-    console.log(role);
-    const token =jwt.sign({id:id,role:role},process.env.asdJwt,{expiresIn:'6h'});
-    return token; 
+function createJwt(id, role) {
+  console.log(id);
+  console.log(role);
+  const token = jwt.sign({ id: id, role: role }, process.env.asdJwt, {
+    expiresIn: "6h",
+  });
+  return token;
 }
 
-module.exports=createJwt;
+module.exports = createJwt;

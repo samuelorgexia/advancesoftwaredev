@@ -1,0 +1,174 @@
+{
+  "1": {
+    "id": 1,
+    "title": "$1,000,000 starting price!",
+    "price": "$1,000,000",
+    "reservePrice": 1000000,
+    "address": "10 Grand Ave",
+    "suburb": "West Ryde",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "coords": {
+      "lat": -33.811446,
+      "long": 151.083681
+    },
+    "size": 235,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "thumbnail": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+    "image": [
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"
+    ],
+    "auctionLive": false,
+    "auctionTime": null,
+    "auctionCompleted": {
+      "date": 1631171986648
+    }
+  },
+  "2": {
+    "id": 2,
+    "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
+    "reservePrice": 1500000,
+    "address": "4 Taylor Ave",
+    "suburb": "Melrose Park",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+
+    "size": 235,
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "thumbnail": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+    "image": [
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg"
+    ],
+    "coords": {
+      "lat": -33.811389,
+      "long": 151.071901
+    },
+    "auctionLive": true,
+    "auctionTime": null
+  },
+  "3": {
+    "id": 3,
+    "title": "$1,500,000 starting price!",
+    "reservePrice": 2700000,
+    "price": "$1,000,000 - $1,500,000",
+    "address": "84 Bowden street",
+    "suburb": "Meadowbank",
+    "state": "NSW",
+    "postcode": "2112",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "thumbnail": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "coords": {
+      "lat": -33.815658,
+      "long": 151.094227
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  },
+  "4": {
+    "id": 4,
+    "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
+    "reservePrice": 650000,
+    "address": "12 Neville Street",
+    "suburb": "Ryde",
+    "state": "NSW",
+    "postcode": "2112",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "thumbnail": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+    "coords": {
+      "lat": -33.797443,
+      "long": 151.109567
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  },
+  "5": {
+    "id": 5,
+    "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
+    "reservePrice": 1150000,
+    "address": "42 Bank Street",
+    "suburb": "West Ryde",
+    "state": "NSW",
+    "postcode": "2114",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "thumbnail": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "coords": {
+      "lat": -33.813408,
+      "long": 151.089815
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  },
+  "6": {
+    "id": 6,
+    "title": "$1,500,000 starting price!",
+    "price": "$1,000,000 - $1,500,000",
+    "reservePrice": 990000,
+    "address": "2 Clarke Street",
+    "suburb": "Rydalemere",
+    "state": "NSW",
+    "postcode": "2116",
+    "description": "Get this once in a lifetime opportunity house today! You're missing out fam! cmon right now before it's too late :'(",
+    "features": {
+      "bed": 2,
+      "bath": 1,
+      "car": 1
+    },
+    "thumbnail": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg",
+    "agent": "Abraham Lincoln",
+    "auctioneer": "George Washington",
+    "auctionLocation": "UTS Building 11",
+    "coords": {
+      "lat": -33.807532,
+      "long": 151.040979
+    },
+    "auctionLive": false,
+    "auctionTime": null
+  }
+}
