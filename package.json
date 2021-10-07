@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/samuelorgexia/advancesoftwaredev#readme",
   "dependencies": {
-    "concurrently": "^6.2.1"
+    "concurrently": "^6.2.1",
+    "react-google-autocomplete": "^2.4.3"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.7",
