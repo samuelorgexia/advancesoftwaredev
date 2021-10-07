@@ -5,27 +5,40 @@ const testData=[
     {firstName:"Samuel",lastName:"Li",email:"@gmail.com",password:"123"},
     {firstName:"",lastName:"",email:"",password:""},
 ];
-const supertest =require ('supertest');
+const request =require ('supertest');
 const index=require('../index'); 
-/*
-describe("test sign up",()=>{
 
-})
-*/
-test("should respond with a 200 status code", async () => {
+describe("test sign up",()=>{
+  test("reponse is 200", async () => {
     const response = await request(index).post("user/signup").send({
       firstName: "test",
-      lastName:"la",
-      email:"123",
+      lastName:"one",
+      email:"testing.li@gmail.com",
+      password: "password123"
+    })
+    expect(response.status).toBe(200)
+    console.log(response);
+  })
+  test("send password error", async () => {
+    const response = await request(index).post("user/signup").send({
+      firstName: "test",
+      lastName:"two",
+      email:"testing@gmail.com",
       password: "password"
     })
-    expect(response.statusCode).toBe(200)
+    expect(response.body).toBe("Password must be 6 to 20 character with which contains a number and upper and lower case letters")
+    console.log(response);
   })
-  
 
+ 
+})
+
+
+  
+/*
 describe('Sample Test', () => {
     it('should test that true === true', () => {
       expect(true).toBe(true)
     })
   })
-  
+  */

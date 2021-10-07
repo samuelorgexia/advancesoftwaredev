@@ -5,7 +5,7 @@ function UserProfilePopup(props) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [emailError, setEmailError] = useState("");
+    const [budget, setBudget] = useState("");
     const getUser = () => {
       console.log(localStorage.jwttoken);
       axios({
@@ -21,7 +21,7 @@ function UserProfilePopup(props) {
         setFirstName(user.first_name);
         setLastName(user.last_name);
         setEmail(user.email);
-        
+        setBudget(user.budget);
       });
     };
   
@@ -32,7 +32,9 @@ function UserProfilePopup(props) {
   
     return props.trigger ? (
       <div>
+    <h1>Profile</h1>
         <div class="w-full max-w-xs">
+           
           <form class="">
             <div class="mb-4">
               <label
@@ -41,13 +43,11 @@ function UserProfilePopup(props) {
               >
                 Name
               </label>
-              <input
+              <p
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
+              > {firstName} </p>
               
             </div>
             <div class="mb-6">
@@ -57,13 +57,11 @@ function UserProfilePopup(props) {
               >
                 Last Name
               </label>
-              <input
-                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="lastname"
-                type=""
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
+              <p
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="name"
+                type="text"
+              > {lastName} </p>
             </div>
             <div class="mb-6">
               <label
@@ -72,14 +70,26 @@ function UserProfilePopup(props) {
               >
                 Email
               </label>
-              <input
-                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
-                type=""
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <p class="text-red-500 text-xs italic">{emailError}</p>
+              <p
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="name"
+                type="text"
+              > {email} </p>
+              
+            </div>
+            <div class="mb-6">
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="password"
+              >
+                Current Budget
+              </label>
+              <p
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="name"
+                type="text"
+              >$ {budget} </p>
+              
             </div>
             <div class="flex items-center justify-between">
         

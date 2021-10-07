@@ -5,11 +5,12 @@ const bycrpt = require("bcrypt");
 const createJwt = require("./jwt/jwt-function");
 const jwtAuth = require("./jwt/jwt-auth");
 const UserVerify = require("./middleware/UserVerify");
-const { password } = require("./db.config");
+const BudgetVerify=require("./middleware/BudgetVerify");
 const salt = 10;
 
 router.post("/signup", UserVerify, async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
+  const budget="100000";
   try {
     // hashed password
     const hashPassword = await bycrpt.hash(password, salt);
@@ -26,10 +27,10 @@ router.post("/signup", UserVerify, async (req, res) => {
           const role = JSON.parse(JSON.stringify(result[0].role_name));
 
           // add user
-          const sql = `INSERT INTO user (first_name,last_name,role,email,password) VALUES (?,?,?,?,?)`;
+          const sql = `INSERT INTO user (first_name,last_name,role,email,password,budget) VALUES (?,?,?,?,?,?)`;
           connection.query(
             sql,
-            [firstName, lastName, role, email, hashPassword],
+            [firstName, lastName, role, email, hashPassword,budget],
             function (error, row) {
               if (error) throw error;
               const token = createJwt(row.insertId, role);
@@ -279,6 +280,23 @@ router.put("/update-user-password", UserVerify, jwtAuth, async (req, res) => {
     } else {
       res.send("No password field in");
     }
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+// update user password for themselves when log in
+router.put("/update-budget",BudgetVerify ,jwtAuth, async (req, res) => {
+  const { budget } = req.body;
+  console.log(budget);
+  console.log(req.user.id);
+  try {
+    const updatesql =
+    "UPDATE user SET budget=? WHERE user_id =" +
+    connection.escape(req.user.id);
+  connection.query(updatesql, [budget], function (err, result) {
+    if (err) throw err;
+    res.send("updated budget");
+  });
   } catch (err) {
     console.log(err.message);
   }

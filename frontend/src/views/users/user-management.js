@@ -18,9 +18,7 @@ import axios from 'axios';
    const [dePopup,setdePopup]=useState(false);
    const [budPopup,setbudPopup]=useState(false);
    const [profilePop,setProfilePop]=useState(false);
-   const [open, setOpen] = useState(false);
-  const [name,setName]=useState("");
-  const cancelButtonRef = useRef(null)
+ 
 
     
     return(
@@ -131,7 +129,7 @@ import axios from 'axios';
       </Dialog>
     </Transition.Root>
 
-    <Transition.Root show={profilePop} as={Fragment}>
+    <Transition.Root show={budPopup} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto"  onClose={setbudPopup}>
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -166,7 +164,7 @@ import axios from 'axios';
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     
                     <div className="mt-2">
-                    <BudgetPopup  trigger={profilePop}setTrigger={setProfilePop}>
+                    <BudgetPopup  trigger={budPopup}setTrigger={setbudPopup}>
                       </BudgetPopup>
                      
 

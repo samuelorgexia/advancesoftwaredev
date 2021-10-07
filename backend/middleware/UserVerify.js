@@ -1,6 +1,8 @@
 const validator=require('validator');
-const passValidator=require('password-validator');
+
 module.exports=function(req,res,next){
+    const passwordValidator = require('password-validator');
+    var schema = new passwordValidator();
     const {firstName,lastName,email,password}=req.body;
     var errorOut=[];
   
@@ -34,9 +36,13 @@ module.exports=function(req,res,next){
         }
     }
     function passwordValid(password){
-        const validation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-        const valid=validation.isStrongPassword(password,[{minLength:6}]);
-        if(validation.isStrongPassword()){
+        schema.is().min(6)
+        .is().max(20)
+        .has().lowercase()                              
+        .has().digits()                               
+        .has().not().spaces();   
+        
+        if(!schema.validate(password)){
             errorOut.push("Password must be 6 to 20 character with which contains a number and upper and lower case letters");
         }
     }
@@ -67,7 +73,6 @@ module.exports=function(req,res,next){
         passwordValid(password);
     }
     if(req.path=="/update-user-themselves"||req.path=="/update-user/:id"){
-       // checkEmailLength(email);
        if(email.length>0){
         verifyEmail(email);
        }
