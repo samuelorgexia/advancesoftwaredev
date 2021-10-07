@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-
+import SearchBar from "../SearchBar/SearchBar";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
@@ -135,7 +135,9 @@ export default function DashboardNav(props) {
               </div>
             </div>
           </div>
-
+          <div className="max-w-7xl mx-auto">
+            <SearchBar/>
+          </div>             
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navigation.map((item, index) =>
