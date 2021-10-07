@@ -109,7 +109,7 @@ export default function PropertyListings(props) {
           onPropertyPreview={handlePropertyPreview}
           properties={properties}
           currentTime={currentTime}
-          mapView={props.mapView}
+          {...props}
         />
       )}
 

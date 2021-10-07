@@ -5,7 +5,6 @@ import PropertyCard from "./PropertyCard.js";
 
 export default function Properties(props) {
   const { properties, mapView, ...rest } = props;
-
   return (
     <div>
       <div

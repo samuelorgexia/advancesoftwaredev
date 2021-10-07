@@ -8,7 +8,7 @@ import Button from "../Buttons/Button.js";
 import { Link } from "react-router-dom";
 
 export default function PropertyCard(props) {
-  const { onPropertyPreview, property, currentTime } = props;
+  const { onPropertyPreview, property, currentTime, history } = props;
 
   const [timeFormat, setTimeFormat] = useState("");
 
@@ -16,9 +16,10 @@ export default function PropertyCard(props) {
     onPropertyPreview(property);
   };
 
+  console.log(history);
   const goToAuction = () => {
-    //history.push("/auction")
-    window.alert(`propertyId - ${property.id}`);
+    history.push("/auction/" + property.id);
+    //window.alert(`propertyId - ${property.id}`);
   };
 
   useEffect(() => {
@@ -67,8 +68,8 @@ export default function PropertyCard(props) {
         </div>
         <div className="py-4">
           {property.auctionLive ? (
-            <Button colour="red">
-              <Link to={`/auction/${property.id}`}>View Auction</Link>
+            <Button colour="red" onClick={goToAuction}>
+              View Auction
             </Button>
           ) : property.auctionCompleted ? (
             <Button colour="gray" onClick={goToAuction}>

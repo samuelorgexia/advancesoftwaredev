@@ -56,6 +56,7 @@ connection.connect((error) => {
        (property_id SERIAL, 
         title VARCHAR(255),
         price VARCHAR(255),
+        reserve_price BIGINT(255),
         address VARCHAR(255),
         suburb VARCHAR(255),
         state VARCHAR(255),
@@ -119,6 +120,7 @@ connection.connect((error) => {
 
     const sql = `REPLACE INTO properties (property_id, title,
     price,
+    reserve_price,
     address,
     suburb,
     state,
@@ -145,6 +147,7 @@ connection.connect((error) => {
         property.id,
         property.title,
         property.price,
+        property.reservePrice,
         property.address,
         property.suburb,
         property.state,
