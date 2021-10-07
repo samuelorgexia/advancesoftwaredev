@@ -17,11 +17,11 @@ steps:
   workingDirectory: backend/
   displayName: 'npm install on backend'
 
-- task: Npm@1
 - script: npm run-script test-ci
   workingDirectory: backend/
   displayName: "Execute unit tests"
   continueOnError: true
+  
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
