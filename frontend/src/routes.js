@@ -28,7 +28,13 @@ const routes = [
     layout: "dashboardLayout",
   },
   {
-    title: "Properties",
+    title: {
+      all: "All properties",
+      upcoming: "Upcoming auctions",
+      live: "Live auctions",
+      past: "Past auctions",
+    },
+    titleKey: "mode",
     pathname: "/properties/:mode",
     component: PropertyListings,
     layout: "dashboardLayout",

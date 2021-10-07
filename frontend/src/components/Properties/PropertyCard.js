@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 export default function PropertyCard(props) {
   const { onPropertyPreview, property, currentTime } = props;
 
+  const [timeFormat, setTimeFormat] = useState("");
+
   const handlePropertyPreview = () => {
-    onPropertyPreview(property.id);
+    onPropertyPreview(property);
   };
 
   const goToAuction = () => {
@@ -19,7 +21,29 @@ export default function PropertyCard(props) {
     window.alert(`propertyId - ${property.id}`);
   };
 
-  const diff = property.auctionTime - currentTime;
+  useEffect(() => {
+    const diff = property.auctionTime - currentTime;
+
+    const text =
+      property.auctionTime < currentTime
+        ? "Pending Auction – " +
+          new Date(property.auctionTime).toLocaleDateString() +
+          " " +
+          new Date(property.auctionTime).toLocaleTimeString()
+        : diff < 1000 * 60
+        ? "Less than a minute"
+        : diff < 1000 * 60 * 60
+        ? Math.floor(diff / (1000 * 60)) + " mintue(s) to auction"
+        : diff < 1000 * 60 * 60 * 24
+        ? Math.floor(diff / (1000 * 60 * 60)) + " hour(s) to auction"
+        : new Date(property.auctionTime).toLocaleDateString() +
+          " " +
+          new Date(property.auctionTime).toLocaleTimeString();
+
+    if (text !== timeFormat) {
+      setTimeFormat(text);
+    }
+  }, [currentTime]);
 
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-md">
@@ -69,22 +93,7 @@ export default function PropertyCard(props) {
             {new Date(property.auctionCompleted.date).toLocaleDateString()}
           </div>
         ) : (
-          <div className="text-center text-xs">
-            {property.auctionTime < currentTime
-              ? "Pending Auction – " +
-                new Date(property.auctionTime).toLocaleDateString() +
-                " " +
-                new Date(property.auctionTime).toLocaleTimeString()
-              : diff < 1000 * 60
-              ? "Less than a minute"
-              : diff < 1000 * 60 * 60
-              ? Math.floor(diff / (1000 * 60)) + " mintue(s) to auction"
-              : diff < 1000 * 60 * 60 * 24
-              ? Math.floor(diff / (1000 * 60 * 60)) + " hour(s) to auction"
-              : new Date(property.auctionTime).toLocaleDateString() +
-                " " +
-                new Date(property.auctionTime).toLocaleTimeString()}
-          </div>
+          <div className="text-center text-xs">{timeFormat}</div>
         )}
       </div>
     </div>
