@@ -35,6 +35,6 @@ const onConnection = (socket) => {
 
 io.on("connection", onConnection);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`ASD app listening on ${port}`);
 });
