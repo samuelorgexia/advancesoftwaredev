@@ -6,10 +6,13 @@ const socket = io("localhost:5000");
 export default function BidDisplay() {
     const [userBid, setUserBid] = useState(0);
     const [highestBid, setHighestBid] = useState(0);
+    const [statusMessage, setStatusMessage] = useState("");
   
     useEffect(()=> {
       socket.on("bid:read", (currentBid) => {
-        setHighestBid(currentBid);
+        const { price, message } = currentBid;
+        setStatusMessage(message);
+        setHighestBid(price);
       });
     },[]);
   
@@ -22,6 +25,7 @@ export default function BidDisplay() {
             <h1>Current Bid: <span>${highestBid.toLocaleString()}</span></h1>
             $ <input type="number" min="1" placeholder="Input your bid" onChange={e => setUserBid(e.target.valueAsNumber)}/>
             <Button onClick={handleBidSubmit}>Place Bid</Button>
+            <p>{statusMessage}</p>
       </div>
     )
 }
