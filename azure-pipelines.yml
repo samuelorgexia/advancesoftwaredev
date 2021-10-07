@@ -12,7 +12,11 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
+- task: Npm@1
+  displayName: npm install
+  inputs:
+    workingDir: 'backend/'
+- script: npm install
 - task: Npm@1
   displayName: npm run test
   inputs:
