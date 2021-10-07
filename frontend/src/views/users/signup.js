@@ -8,7 +8,8 @@ function Signup(props) {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
+  const [firstNameError,setFirstNameError]=useState("");
+  const[lastNameError,setLastNameError]=useState("");
   const { authenticated, setAuthenticated, history } = props;
 
   const register = () => {
@@ -31,7 +32,10 @@ function Signup(props) {
           history.push("/properties/all");
         }
         if (response.status == 200) {
-          //setEmailError(response.data);
+          setEmailError(response.data[0]);
+          setFirstNameError(response.data[1]);
+          setLastNameError(response.data[2]);
+          setPasswordError(response.data[3]||response.data[4]);
         }
       })
       .catch(function (error) {
@@ -62,6 +66,7 @@ function Signup(props) {
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First Name"
               />
+                <p class="text-red-500 text-xs italic">{firstNameError}</p>
             </div>
           </div>
           <div class="md:flex md:items-center mb-6">
@@ -82,6 +87,7 @@ function Signup(props) {
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last Name"
               />
+                <p class="text-red-500 text-xs italic">{lastNameError}</p>
             </div>
           </div>
           <div class="md:flex md:items-center mb-6">

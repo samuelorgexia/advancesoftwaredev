@@ -65,7 +65,7 @@ function PasswordPopup(props) {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
             />
-            <p>{error}</p>
+            <p class="text-red-500 text-xs italic">{error}</p>
           </div>
           <div class="flex items-center justify-between">
             <button

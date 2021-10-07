@@ -12,8 +12,20 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+- task: Npm@1
+- script: npm install
+  workingDirectory: backend/
+  displayName: 'npm install on backend'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: npm run-script test-ci
+  workingDirectory: backend/
+  displayName: "Execute unit tests"
+  continueOnError: true
+  
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/junit.xml'
+    mergeTestResults: true
+    testRunTitle: 'Jest Unit Tests'
+    failTaskOnFailedTests: true

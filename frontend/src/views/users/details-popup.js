@@ -6,22 +6,7 @@ function DetailsPopup(props) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-  const getUser = () => {
-    console.log(localStorage.jwttoken);
-    axios({
-      method: "post",
-      url: "/api/user/get-user",
-      withCredentials: true,
-      headers: {
-        jwt: localStorage.jwttoken,
-      },
-      responseType: "stream",
-    }).then(function (response) {
-      const user = response.data[0];
-      //setFirstName(user.first_name);
-      console.log(response.data[0]);
-    });
-  };
+
 
   const updateDetails = () => {
     console.log(firstName);
@@ -101,6 +86,7 @@ function DetailsPopup(props) {
             />
             <p class="text-red-500 text-xs italic">{emailError}</p>
           </div>
+          
           <div class="flex items-center justify-between">
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

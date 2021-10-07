@@ -38,6 +38,7 @@ connection.connect((error) => {
        password VARCHAR(255),
        email VARCHAR(255),
        user_type INT,
+       budget VARCHAR(255),
        PRIMARY KEY (user_id)
        )ENGINE=INNODB`;
 
@@ -91,6 +92,7 @@ connection.connect((error) => {
     console.log("user Table created");
   });
 
+  
   connection.query(realestate, function (err, result) {
     if (err) throw err;
     console.log("auctioner table created");
