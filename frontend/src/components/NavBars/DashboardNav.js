@@ -7,7 +7,8 @@ import { HomeIcon } from "@heroicons/react/solid";
 import { NavLink } from "react-router-dom";
 
 export default function DashboardNav(props) {
-  const { user, navigation, userNavigation, history, authenticated } = props;
+  const { user, navigation, userNavigation, history, authenticated, onSearch } =
+    props;
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -136,8 +137,8 @@ export default function DashboardNav(props) {
             </div>
           </div>
           <div className="max-w-7xl mx-auto">
-            <SearchBar/>
-          </div>             
+            <SearchBar onSearch={onSearch} />
+          </div>
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navigation.map((item, index) =>
