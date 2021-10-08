@@ -5,8 +5,8 @@ import signup from "./views/users/signup";
 import userManagement from "./views/users/user-management";
 
 import addProperty from "./views/admin/addProperty";
-import userAdmin from "./views/admin/UserAdmin";
-import propertyManagement from "./views/admin/propertyManagement"
+import userAdmin from "./views/admin/userAdmin";
+import propertyManagement from "./views/admin/propertyManagement";
 import updateUserAdmin from "./views/admin/UpdateUserAdmin";
 
 import Property from "./views/Properties/Property";
@@ -57,7 +57,7 @@ const routes = [
     title: "Live Auction",
     pathname: "/auction/:id",
     component: Auction,
-    layout: "dashboardLayout"
+    layout: "dashboardLayout",
   },
   {
     title: "Add property",
@@ -84,4 +84,5 @@ const routes = [
     layout: "dashboardLayout",
   },
 ];
+
 export default routes;

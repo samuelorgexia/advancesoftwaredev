@@ -4,7 +4,7 @@ import GoogleMapReact from "google-map-react";
 import Marker from "../Map/Marker";
 
 export default function PropertyMap(props) {
-  const { centre, properties, currentTime, onPropertyPreview } = props;
+  const { centre, properties, currentTime, onPropertyPreview, history } = props;
 
   const defaultMap = {
     zoom: 14,
@@ -72,7 +72,7 @@ export default function PropertyMap(props) {
                   onClick={() =>
                     type === "upcoming"
                       ? onPropertyPreview(property)
-                      : window.alert("auction id - " + property.id)
+                      : history.push(`/auction/${property.id}`)
                   }
                 />
               );

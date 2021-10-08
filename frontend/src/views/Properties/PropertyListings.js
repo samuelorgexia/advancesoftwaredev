@@ -13,7 +13,7 @@ import Button from "../../components/Buttons/Button";
 import { MapIcon, ViewListIcon } from "@heroicons/react/solid";
 
 export default function PropertyListings(props) {
-  const { match, mapView, coords } = props;
+  const { match, mapView, setMapView, coords } = props;
 
   const [propertyData, setPropertyData] = useState(null);
 
@@ -65,6 +65,7 @@ export default function PropertyListings(props) {
 
     return () => {
       clearInterval(interval);
+      setMapView(false);
     };
   }, []);
 
@@ -98,6 +99,7 @@ export default function PropertyListings(props) {
           properties={properties}
           currentTime={currentTime}
           centre={coords}
+          {...props}
         />
       ) : (
         <Properties

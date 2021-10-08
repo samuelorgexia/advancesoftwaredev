@@ -75,6 +75,7 @@ export default function DashboardLayout(props) {
                   {...rest}
                   {...props}
                   mapView={mapView}
+                  setMapView={setMapView}
                   authenticated={authenticated}
                   setAuthenticated={setAuthenticated}
                   coords={coords || defaultCoords}
