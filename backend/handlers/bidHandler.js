@@ -1,6 +1,7 @@
 module.exports = (io, socket) => {
     const createBid = ({ userBid, highestBid }) => {
-        let newHighestBid = highestBid
+        let newHighestBid = highestBid;
+        
         if (userBid > highestBid) {
             newHighestBid = userBid;
             socket.emit("bid:read", { message: "You are the new highest bidder!", price: newHighestBid });
