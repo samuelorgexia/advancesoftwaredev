@@ -33,9 +33,9 @@ export default function UserAdmin(props) {
             <div class="block">
                 {Users && Users.map(user =>
                     <div key={user.user_id} class="grid gap-4 grid-cols-4">
-                        <div class="flex">{user.first_name}</div>
-                        <div class="flex">{user.last_name}</div>
-                        <div class="flex">{user.email}</div>
+                        <div class="flex items-center">{user.first_name}</div>
+                        <div class="flex items-center">{user.last_name}</div>
+                        <div class="flex items-center">{user.email}</div>
                         <Link class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline justify-center" to={'update-user-admin/'+user.user_id}>Update User</Link>
                     </div>
                 )}
