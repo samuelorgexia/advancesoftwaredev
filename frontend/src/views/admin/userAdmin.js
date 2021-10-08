@@ -21,26 +21,26 @@ export default function UserAdmin(props) {
     
 
     return (
-        <div>
-            <table class="object-fill">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Role</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Users && Users.map(user =>
-                        <tr key={user.user_id}>
-                            <td>{user.first_name} {user.last_name}</td>
-                            <td>{user.role}</td>
-                            <td>{user.email}</td>
-                            <Link to={'update-user-admin/'+user.user_id}>Update User</Link>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+        <div class="space-y-4">
+            <div class="block">
+                <div class="grid gap-4 grid-cols-4">
+                    <div class="flex block text-gray-700 text-sm font-bold mb-2">Name</div>
+                    <div class="flex block text-gray-700 text-sm font-bold mb-2">Role</div>
+                    <div class="flex block text-gray-700 text-sm font-bold mb-2">Email</div>
+                    <div class="flex block text-gray-700 text-sm font-bold mb-2"></div>
+                </div>
+            </div>
+            <div class="block">
+                {Users && Users.map(user =>
+                    <div key={user.user_id} class="grid gap-4 grid-cols-4">
+                        <div class="flex">{user.first_name}</div>
+                        <div class="flex">{user.last_name}</div>
+                        <div class="flex">{user.email}</div>
+                        <Link class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline justify-center" to={'update-user-admin/'+user.user_id}>Update User</Link>
+                    </div>
+                )}
+            </div>       
         </div>
+        
     );
 }
