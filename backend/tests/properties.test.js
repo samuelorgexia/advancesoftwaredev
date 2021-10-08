@@ -1,4 +1,4 @@
-const connection = require("../db.js");
+//const connection = require("../db.js");
 const propertyData = require("../core/PropertyData.json");
 
 const handlePropertyResp = (property_sql) => {
