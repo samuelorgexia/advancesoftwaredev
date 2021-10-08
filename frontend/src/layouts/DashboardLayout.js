@@ -58,8 +58,8 @@ export default function DashboardLayout(props) {
 
   //meadowbank
   const defaultCoords = {
-    lat: false ? -33.8157836 : null,
-    lng: false ? 151.0896983 : null,
+    lat: -33.8157836,
+    lng: 151.0896983,
   };
 
   const getRoutes = (routes) => {

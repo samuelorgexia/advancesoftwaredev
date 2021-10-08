@@ -40,7 +40,7 @@ export default function SearchBar(props) {
           class="roundde-l-full w-full py-3 px-6 m-5 text-gray-700 leading-tight focus:outline-none"
           id="search"
           type="text"
-          //defaultValue={"Meadowbank NSW, Australia"}
+          defaultValue={"Meadowbank NSW, Australia"}
           placeholder="Search for Property"
           ref={ref}
         />
