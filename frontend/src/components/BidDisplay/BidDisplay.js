@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../components/Buttons/Button";
 import { io } from "socket.io-client";
+import axios from "axios";
 const socket = io("localhost:5000");
 
 export default function BidDisplay() {
@@ -9,15 +10,29 @@ export default function BidDisplay() {
     const [statusMessage, setStatusMessage] = useState("");
   
     useEffect(()=> {
-      socket.on("bid:read", (currentBid) => {
-        const { price, message } = currentBid;
-        setStatusMessage(message);
-        setHighestBid(price);
-      });
+      getPropertyById(2);
+      readBid();
     },[]);
   
     const handleBidSubmit = ()=> {
-        socket.emit("bid:create", userBid);
+        socket.emit("bid:create", { userBid, highestBid });
+    }
+
+    const readBid = () => {
+      socket.on("bid:read", (currentHighestBid) => {
+        const { price, message } = currentHighestBid;
+        setStatusMessage(message);
+        setHighestBid(price);
+      });
+    }
+
+    const getPropertyById = (id) => {
+      axios.get(`/api/properties/get-property/${id}`)
+      .then((response) => response.data)
+      .then((data) => {
+        const price = data.reservePrice;
+        setHighestBid(price);
+      });
     }
 
     return (
