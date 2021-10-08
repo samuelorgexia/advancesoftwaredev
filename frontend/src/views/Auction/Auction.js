@@ -1,10 +1,10 @@
 import React from 'react'
 import BidDisplay from '../../components/BidDisplay/BidDisplay'
 
-export default function Auction() {
+export default function Auction(props) {
     return (
         <div>
-            <BidDisplay/>
+            <BidDisplay auctionId={props.match.params.id}/>
         </div>
     )
 }

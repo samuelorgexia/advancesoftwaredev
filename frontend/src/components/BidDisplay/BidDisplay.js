@@ -4,13 +4,13 @@ import { io } from "socket.io-client";
 import axios from "axios";
 const socket = io("localhost:5000");
 
-export default function BidDisplay() {
+export default function BidDisplay({ auctionId }) {
     const [userBid, setUserBid] = useState(0);
     const [highestBid, setHighestBid] = useState(0);
     const [statusMessage, setStatusMessage] = useState("");
   
     useEffect(()=> {
-      getPropertyById(2);
+      getPropertyById(auctionId);
       readBid();
     },[]);
   
