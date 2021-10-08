@@ -6,13 +6,6 @@ export default function UserAdmin(props) {
 
     const [Users, setUsers] = useState([]);
     
-/*    const users = Object.values(userList)
-        .map((user, index) => {
-            return {
-                ...user,
-            }
-        })
-*/
     const getUsers =() => {
         fetch("/user/get-users")
         .then((response) => response.json())
@@ -29,7 +22,7 @@ export default function UserAdmin(props) {
 
     return (
         <div>
-            <table>
+            <table class="object-fill">
                 <thead>
                     <tr>
                         <th>Name</th>
