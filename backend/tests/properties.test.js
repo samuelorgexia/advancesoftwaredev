@@ -69,7 +69,7 @@ const handlePropertyResp = (property_sql) => {
 
 describe("retrieving properties", () => {
   beforeAll((done) => {
-    setTimeout(done, 3000); //hacky way to wait for connection until we
+    setTimeout(done, 15000); //hacky way to wait for connection until we
     //setup pool connections to mysql
   });
 
