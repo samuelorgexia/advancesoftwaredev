@@ -13,12 +13,7 @@ import Button from "../../components/Buttons/Button";
 import { MapIcon, ViewListIcon } from "@heroicons/react/solid";
 
 export default function PropertyListings(props) {
-  const { match, mapView } = props;
-
-  const coords = {
-    lat: -33.8188484,
-    lng: 151.0619369,
-  };
+  const { match, mapView, coords } = props;
 
   const [propertyData, setPropertyData] = useState(null);
 

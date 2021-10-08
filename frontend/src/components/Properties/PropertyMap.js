@@ -7,7 +7,7 @@ export default function PropertyMap(props) {
   const { centre, properties, currentTime, onPropertyPreview } = props;
 
   const defaultMap = {
-    zoom: 15,
+    zoom: 14,
   };
 
   return (
