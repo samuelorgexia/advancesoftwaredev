@@ -5,7 +5,7 @@ import signup from "./views/users/signup";
 import userManagement from "./views/users/user-management";
 
 import addProperty from "./views/admin/addProperty";
-import userAdmin from "./views/admin/userAdmin";
+import userAdmin from "./views/admin/UserAdmin";
 import propertyManagement from "./views/admin/propertyManagement";
 import updateUserAdmin from "./views/admin/UpdateUserAdmin";
 
