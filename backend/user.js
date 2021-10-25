@@ -40,7 +40,8 @@ router.post("/signup", UserVerify, async (req, res) => {
           );
         });
       } else {
-        res.sendStatus(400).json("Existing user with that emails exist");
+   //   res.sendStatus(404).json("Existing user with that emails exist");
+   res.json({existingError:"Existing user with that email exist"});
       }
     });
   } catch (err) {
@@ -131,7 +132,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
         console.log("email");
         const updateEmail =
           "UPDATE user SET email=? WHERE user_id =" +
-          connection.escape(req.user.id);
+          connection.escape(id);
         connection.query(updateEmail, [previousEmail], function (err, result) {
           if (err) throw err;
           //  console.log(result);
@@ -141,7 +142,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
         console.log("first name");
         const updateFirstName =
           "UPDATE user SET first_name=? WHERE user_id =" +
-          connection.escape(req.user.id);
+          connection.escape(id);
         connection.query(
           updateFirstName,
           [previousFirstName],
@@ -155,7 +156,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
         console.log("last name");
         const updatesqlLastName =
           "UPDATE user SET last_name=? WHERE user_id =" +
-          connection.escape(req.user.id);
+          connection.escape(id);
         connection.query(
           updatesqlLastName,
           [previousLastName],
@@ -169,7 +170,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
         console.log("password");
         const updatesqlPassword =
           "UPDATE user SET password=? WHERE user_id =" +
-          connection.escape(req.user.id);
+          connection.escape(id);
         connection.query(
           updatesqlPassword,
           [previousPassword],
@@ -212,7 +213,7 @@ router.put("/update-user-themselves", UserVerify, jwtAuth, async (req, res) => {
         [firstName, lastName, email],
         function (err, result) {
           if (err) throw err;
-          // console.log(result);
+          
           res.send("Updated details");
         }
       );
@@ -317,12 +318,21 @@ router.delete("/delete-user/:id", (req, res) => {
 router.post("/verify", jwtAuth, async (req, res) => {
   console.log(res.headersSent);
   try {
-    res.json(true);
+    const userSql="SELECT role FROM user WHERE user_id="+connection.escape(req.user.id);
+   connection.query(userSql,function (err,result){
+      if (err) throw err;
+      console.log(result);
+    const role= JSON.parse(JSON.stringify(result[0].role));
+      res.json(true);
+    });
+    
+  
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
   }
 });
+
 
 router.post("/login", UserVerify, async (req, res) => {
   const { email, password } = req.body;
@@ -334,9 +344,8 @@ router.post("/login", UserVerify, async (req, res) => {
       connection.escape(email);
     connection.query(getUsersql, function (err, result) {
       if (err) throw err;
-      //const queryEmail=JSON.parse(JSON.stringify(result[0].email));
       console.log(result.length);
-      console.log(JSON.parse(JSON.stringify(result[0].email)));
+
       if (result.length == 1) {
         // mismatch
         if (
@@ -346,7 +355,7 @@ router.post("/login", UserVerify, async (req, res) => {
             JSON.parse(JSON.stringify(result[0].password))
           )
         ) {
-          res.json("Password is incorrect");
+          res.json({signInPassErr:"Password is incorrect"});
         }
         // if user email and password matches
         if (
@@ -360,11 +369,11 @@ router.post("/login", UserVerify, async (req, res) => {
             JSON.parse(JSON.stringify(result[0].user_id)),
             JSON.parse(JSON.stringify(result[0].role))
           );
-          //console.log(token);
+          
           res.status(200).json({ token });
         }
       } else {
-        res.json("Email does not match");
+        res.json({signInEmailErr:"Email does not match or exist"});
       }
     });
   } catch (err) {}

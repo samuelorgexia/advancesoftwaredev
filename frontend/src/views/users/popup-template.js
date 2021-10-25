@@ -6,11 +6,11 @@ import {
     Link
   } from "react-router-dom";
   import { Dialog, Transition } from '@headlessui/react'
-function PopupTemplate(){
+function PopupTemplate(prop){
     return(
     <div>
-          <Transition.Root show={passpopup} as={Fragment}>
-      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto"  onClose={setpassPopup}>
+          <Transition.Root show={prop} as={Fragment}>
+      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto"  onClose={prop}>
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
@@ -44,7 +44,7 @@ function PopupTemplate(){
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     
                     <div className="mt-2">
-                    <PasswordPopup trigger={passpopup} setTrigger={setpassPopup}>
+                    <PasswordPopup trigger={prop} setTrigger={prop}>
                      </PasswordPopup>
                     </div>
                   </div>

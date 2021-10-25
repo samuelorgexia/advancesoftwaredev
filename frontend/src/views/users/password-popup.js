@@ -14,6 +14,7 @@ function PasswordPopup(props) {
           jwt: localStorage.getItem("jwttoken"),
         },
         data: {
+          confirmPassword:confirmPassword,
           password: password,
         },
       }).then(function (reponse) {
@@ -21,7 +22,7 @@ function PasswordPopup(props) {
         if (reponse.data == "updated password") {
           props.setTrigger(false);
         } else {
-          setError(reponse.data[0]);
+          setError(reponse.data[0].passError);
         }
       });
     }

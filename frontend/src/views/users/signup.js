@@ -12,7 +12,14 @@ function Signup(props) {
   const[lastNameError,setLastNameError]=useState("");
   const { authenticated, setAuthenticated, history } = props;
 
+  function clear(){
+    setEmailError("");
+    setFirstNameError("");
+    setLastNameError("");
+    setPasswordError("");
+  }
   const register = () => {
+    clear();
     axios({
       method: "post",
       url: "/api/user/signup",
@@ -32,11 +39,29 @@ function Signup(props) {
           history.push("/properties/all");
         }
         if (response.status == 200) {
-          setEmailError(response.data[0]);
-          setFirstNameError(response.data[1]);
-          setLastNameError(response.data[2]);
-          setPasswordError(response.data[3]||response.data[4]);
+          const errorJson=response.data;
+          if(Array.isArray(errorJson)){
+            for(var i in errorJson){
+              var error=errorJson[i];
+              if(error.emailError){
+                setEmailError(error.emailError);
+              }
+              if(error.firstNameError){
+                setFirstNameError(error.firstNameError);
+              }
+              if(error.lastNameError){
+                setLastNameError(error.lastNameError);
+              }
+              if(error.passError){
+                setPasswordError(error.passError);
+              }
+            }
+          
+          }else{
+            setEmailError(response.data.exitingErrors);
+          }
         }
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -124,13 +149,14 @@ function Signup(props) {
               <input
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="inline-password"
-                type="text"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
               />
-              <p class="text-red-500 text-xs italic">{passwordError}</p>
+               <p class="text-red-500 text-xs italic">{passwordError}</p>
             </div>
+          
           </div>
 
           <div class="md:flex md:items-center">

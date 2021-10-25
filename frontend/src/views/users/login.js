@@ -25,16 +25,26 @@ function Login() {
         if (response.data.token) {
           window.location.assign("/properties/all");
           localStorage.setItem("jwttoken", response.data.token);
+        }        
+        if (response.data.signInPassErr) {
+          setError(response.data.signInPassErr);
         }
-        if (response.data == "Password is incorrect") {
-          setError(response.data);
-        }
-        if (response.data == "Email does not match") {
-          setEmailError(response.data);
+        if (response.data.signInEmailErr) {
+          setEmailError(response.data.signInEmailErr);
         } else {
-          setError(response.data[1]);
-          setEmailError(response.data[0]);
+          for(var i in response.data){
+            var error=response.data[i];
+            if(error.emailError){
+              setEmailError(error.emailError);
+            }
+            if(error.passError){
+              setError(error.passError);
+            }
+            
+          }
+    
         }
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -80,6 +90,7 @@ function Login() {
               />
               <p class="text-red-500 text-xs italic">{error}</p>
             </div>
+            
             <div class="flex items-center justify-between">
               <button
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -88,12 +99,7 @@ function Login() {
               >
                 Sign In
               </button>
-              <a
-                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                href="#"
-              >
-                Forgot Password?
-              </a>
+        
             </div>
           </form>
         </div>

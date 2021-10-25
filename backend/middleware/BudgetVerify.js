@@ -7,12 +7,28 @@ module.exports=function(req,res,next){
     function checkValue(money){
         if(money<=0){
             errorOut.push("Must be above 0.00 ");
+            
         }
+        
     }
     function valueLength(money){
-        if(money.length==0){
+        
+        if(money.length==null){
             errorOut.push("Value must be filled in");
+            console.log("works");
+            return true;
         }
+        return false;
+        
+    }
+    function checkForChara(money){
+        if((/[a-zA-z]/).test(money)){
+            errorOut.push("Field is not filled in or contains characters not numbers");
+            return true;
+        }
+        return false;
+
+
     }
     
     function errorOutput(errorArr){
@@ -20,9 +36,12 @@ module.exports=function(req,res,next){
          next(res.json(errorOut));
         }
     }
-    checkValue(number);
-    valueLength(number);
-  
+
+        if(!checkForChara(number)){
+            checkValue(number);
+        }
+    
+
 
 
 errorOutput(errorOut);

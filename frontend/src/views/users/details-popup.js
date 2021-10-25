@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Usermanagement from "./user-management";
 function DetailsPopup(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-
+  const activeStatus=true;
 
   const updateDetails = () => {
-    console.log(firstName);
     axios({
       method: "put",
       url: "/api/user/update-user-themselves",
@@ -24,15 +23,18 @@ function DetailsPopup(props) {
     })
       .then(function (reponse) {
         console.log(reponse);
-        if (firstName.length > 0 || lastName > 0 || email > 0) {
+        if(Array.isArray(reponse.data)){
+          setEmailError(reponse.data[0].emailError||reponse.data[0].editUserError);
+        }else{
+//<Usermanagement active={activeStatus}/>
           props.setTrigger(false);
-        } else {
-          setEmailError(reponse.data[0]);
+         props.setTrigger(true);
         }
       })
       .catch(function (error) {
         console.log(error);
       });
+  
   };
   useEffect(() => {});
 

@@ -1,53 +1,29 @@
 const request = require("supertest");
-const index = require("../index");
-
-// signup
+const connection = require("../db");
+const index=require("../index");
+// login
 const testData = [
-  { firstName: "", lastName: "", email: "", password: "" },
+  { firstName: "Michael", lastName: "leee", email: "testing1@gmail.com", password: "password123" },
   { firstName: "Samuel", lastName: "Li", email: "", password: "" },
   { firstName: "Samuel", lastName: "Li", email: "@gmail.com", password: "123" },
   { firstName: "", lastName: "", email: "", password: "" },
 ];
 
-/* please fix before committing
-describe("test sign up", () => {
-  test("reponse is 200", async (done) => {
-    try {
-      const response = await request(index).post("user/signup").send({
-        firstName: "test",
-        lastName: "one",
-        email: "testing.li@gmail.com",
-        password: "password123",
-      });
-      expect(response.status).toBe(200);
-      console.log(response);
-      done();
-    } catch (e) {
-      done(e);
-    }
-  });
-  test("send password error", async (done) => {
-    try {
-      const response = await request(index).post("user/signup").send({
-        firstName: "test",
-        lastName: "two",
-        email: "testing@gmail.com",
-        password: "password",
-      });
-      expect(response.body).toBe(
-        "Password must be 6 to 20 character with which contains a number and upper and lower case letters"
-      );
 
-      console.log(response);
-      done();
-    } catch (e) {
-      done(e);
-    }
+/*
+describe("test login", () => {
+  beforeAll((done)=>{
+    setTimeout(done,3000);
   });
-});*/
+  test("working login response",(done)=>{
+    const loginSql="SELECT user_id,email,password,role FROM user WHERE email= " +
+connection.escape("samuelgh.li@gmail.com");
+    connection.query(loginSql,["samuelgh.li@gmail.com","dranzer123"],function(error,result){
+      console.log(result);
+      expect(result.length).toBe(1);
+    });
+    done();
+  });
 
-describe("Sample Test", () => {
-  it("should test that true === true", () => {
-    expect(true).toBe(true);
-  });
 });
+*/
