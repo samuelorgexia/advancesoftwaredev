@@ -128,4 +128,18 @@ const handlePropertyResp = (property_sql) => {
   };
 };
 
+// admin features
+router.get("/get-properties", (req, res) => {
+  try {
+    const sql = "SELECT * FROM properties";
+    connection.query(sql, function (error, results) {
+      if (error) throw error;
+      console.log(results);
+      res.send(results);
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 module.exports = router;

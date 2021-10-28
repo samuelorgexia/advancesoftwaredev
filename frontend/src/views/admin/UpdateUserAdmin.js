@@ -16,6 +16,7 @@ export default function UpdateUserAdmin(props) {
     .then((response) => response.json())
     .then((result) => {
         const user = result[0];
+        console.log(result);
         setFirstName(user.first_name);
         setLastName(user.last_name);
         setRole(user.role);

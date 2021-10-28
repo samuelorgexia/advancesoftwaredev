@@ -23,7 +23,7 @@ export default function UserAdmin(props) {
     return (
         <div class="space-y-4">
             <div class="block">
-                <div class="grid gap-5 grid-cols-5">
+                <div class="grid gap-5 grid-cols-5 p-1">
                     <div class="flex block text-gray-700 text-sm font-bold mb-2">First Name</div>
                     <div class="flex block text-gray-700 text-sm font-bold mb-2">Last Name</div>
                     <div class="flex block text-gray-700 text-sm font-bold mb-2">Role</div>
@@ -33,7 +33,7 @@ export default function UserAdmin(props) {
             </div>
             <div class="block">
                 {Users && Users.map(user =>
-                    <div key={user.user_id} class="grid gap-5 grid-cols-5">
+                    <div key={user.user_id} class="grid gap-5 grid-cols-5 p-1">
                         <div class="flex items-center">{user.first_name}</div>
                         <div class="flex items-center">{user.last_name}</div>
                         <div class="flex items-center">{user.role}</div>
