@@ -8,7 +8,7 @@ import { ReactComponent as BathIcon } from "../../assets/icons/bath.svg";
 import { ReactComponent as CarIcon } from "../../assets/icons/car.svg";
 import io from "socket.io-client";
 import { AuthService } from "../../services/AuthService.js";
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://auctionify.azurewebsites.net/");
 
 export default function PropertyDetails({ id, property }) {
   const [username, setUsername] = useState("");
