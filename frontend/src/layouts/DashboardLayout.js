@@ -49,6 +49,8 @@ export default function DashboardLayout(props) {
   const userNavigation = [
     { name: "Settings", href: "/user-manage" },
     { name: "Add Listing", href: "/add-property" },
+    { name: "Manage Users", href: "/user-admin" },
+    { name: "Manage Properties", href: "/property-admin" },
     {
       name: "Sign out",
       href: "#",

@@ -16,33 +16,35 @@ export default function UpdateUserAdmin(props) {
     .then((response) => response.json())
     .then((result) => {
         const user = result[0];
-        console.log(result);
-        setFirstName(user.first_name);
-        setLastName(user.last_name);
-        setRole(user.role);
+        try {
+          setFirstName(user.first_name);
+          setLastName(user.last_name);
+          setRole(user.role);
+        } catch (err) {
+          console.log(err);
+        }
     })
   }
 
-    const putUser = () => {
-        axios({
-          method: "put",
-          url: "/user/update-user/" + user_id,
-          data: {
-            firstName: firstName,
-            lastName: lastName,
-            role: role
-          },
+  const putUser = () => {
+      axios({
+        method: "put",
+        url: "/user/update-user/" + user_id,
+        data: {
+          firstName: firstName,
+          lastName: lastName,
+          role: role
+        },
+      })
+        .then(function (response) {
+          console.log(response.data);
         })
-          .then(function (response) {
-            console.log(response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        .catch(function (error) {
+          console.log(error);
+        });
     };
 
     const deleteUser = () => {
-      const user_id = props.match.params.id;
       axios({
         method: "delete",
         url: "/user/delete-user/" + user_id,
