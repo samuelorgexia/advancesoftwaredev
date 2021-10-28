@@ -142,4 +142,17 @@ router.get("/get-properties", (req, res) => {
   }
 });
 
+router.delete("/delete-property/:id", (req, res) => {
+  const { id } = req.params;
+  try {
+    const sql = "DELETE FROM properties WHERE property_id = " + connection.escape(id);
+    const deleteProperty = connection.query(sql, function (err, results) {
+      if (err) throw err;
+      res.send("Deleted property " + id);
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 module.exports = router;
