@@ -32,24 +32,29 @@ export default function PropertyManagement(props){
         .then((response) => response.json())
         .then((result) => {
             const property = result;
-            setTitle(property.title);
-            setPrice(property.price);
-            setReserve(property.reserve_price);
-            setAddress(property.address);
-            setSuburb(property.suburb);
-            setState(property.state);
-            setPostCode(property.postcode);
-            setDescription(property.description);
-            setBedrooms(property.features_bed);
-            setBathrooms(property.features_bath);
-            setCars(property.features_car);
-            setLong(property.coords_long);
-            setLat(property.coords_lat);
-            setSize(property.property_size);
-            setAgent(property.agent);
-            setAuctioneer(property.auctioneer);
-            setAuctionLocation(property.auction_location);
-            setAuctionDate(property.auction_date_time);
+            try {
+                setTitle(property.title);
+                setPrice(property.price);
+                setReserve(property.reserve_price);
+                setAddress(property.address);
+                setSuburb(property.suburb);
+                setState(property.state);
+                setPostCode(property.postcode);
+                setDescription(property.description);
+                setBedrooms(property.features_bed);
+                setBathrooms(property.features_bath);
+                setCars(property.features_car);
+                setLong(property.coords_long);
+                setLat(property.coords_lat);
+                setSize(property.property_size);
+                setAgent(property.agent);
+                setAuctioneer(property.auctioneer);
+                setAuctionLocation(property.auction_location);
+                setAuctionDate(property.auction_date_time);
+            } catch (err) {
+                console.log(err);
+            }
+            
         })
       }
 
@@ -58,7 +63,12 @@ export default function PropertyManagement(props){
     }
 
     const deleteProperty = () => {
-        //yeet
+      axios({
+        method: "delete",
+        url: "/api/properties/delete-property/" + property_id,
+      }).then(function (error) {
+        console.log(error);
+      });
     }
 
     useEffect(() => {
