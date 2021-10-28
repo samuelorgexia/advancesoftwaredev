@@ -1,4 +1,5 @@
 const validator=require('validator');
+const connection = require("../db");
 
 module.exports=function(req,res,next){
     const passwordValidator = require('password-validator');
@@ -50,6 +51,21 @@ module.exports=function(req,res,next){
          next(res.json(errorOut));
         }
     }
+    function checkEmailExist(email){
+        if(email.length>0){
+            const getEmailSql="SELECT * FROM user WHERE email =" + connection.escape(email);
+            const get = connection.query(getEmailSql, (err, data) => {
+              if (err) {
+                console.error(err);
+                return;
+              }
+               if(data.length>0){
+                 errorOut.push({emailErrorExist:"This email is already being used"});
+               }
+            });
+        
+          }
+    }
 
     if(req.path=="/signup"){
        verifyEmail(email);
@@ -76,9 +92,11 @@ module.exports=function(req,res,next){
        if(email.length>0){
         verifyEmail(email);
        }
+       checkEmailExist(email);
        if(email.length==0&&firstName.length==0&&lastName.length==0){
         errorOut.push({editUserError:"One field must be filled in order to update details"});
        }
+       console.log(errorOut);
     }
 
 errorOutput(errorOut);

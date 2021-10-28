@@ -102,7 +102,7 @@ router.post("/get-user", jwtAuth, (req, res) => {
 // admin feature
 router.put("/update-user/:id", UserVerify, async (req, res) => {
   const { id } = req.params;
-  var { firstName, lastName, email, password } = req.body;
+  var { firstName, lastName, email, password,role } = req.body;
 
   try {
     // retrieve current details
@@ -117,11 +117,11 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
       const previousPassword = JSON.parse(JSON.stringify(result[0].password));
       // update details first
       const updatesql =
-        "UPDATE user SET first_name=?,last_name=?,email=?,password=? WHERE user_id =" +
+        "UPDATE user SET first_name=?,last_name=?,email=?,password=?,role=? WHERE user_id =" +
         connection.escape(id);
       connection.query(
         updatesql,
-        [firstName, lastName, email, password],
+        [firstName, lastName, email, password,role],
         function (err, result) {
           if (err) throw err;
           // console.log(result);
@@ -187,11 +187,11 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
     console.log(err.message);
   }
 });
+
 // update user for themselves when login
 router.put("/update-user-themselves", UserVerify, jwtAuth, async (req, res) => {
   var { firstName, lastName, email } = req.body;
   console.log(req.body);
-  console.log(req.user.id);
   try {
     // retrieve current details
     const sql =
