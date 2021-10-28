@@ -30,3 +30,5 @@ steps:
       mergeTestResults: true
       testRunTitle: "Jest Unit Tests"
       failTaskOnFailedTests: true
+
+  - task: PublishBuildArtifacts@1
