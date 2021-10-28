@@ -40,7 +40,6 @@ router.post("/signup", UserVerify, async (req, res) => {
           );
         });
       } else {
-   //   res.sendStatus(404).json("Existing user with that emails exist");
    res.json({existingError:"Existing user with that email exist"});
       }
     });
@@ -102,42 +101,32 @@ router.post("/get-user", jwtAuth, (req, res) => {
 // admin feature
 router.put("/update-user/:id", UserVerify, async (req, res) => {
   const { id } = req.params;
-  var { firstName, lastName, email, password,role } = req.body;
-
+  var { firstName, lastName,role } = req.body;
+  console.log(req.body);
   try {
     // retrieve current details
     const sql = "SELECT * FROM user WHERE user_id =" + connection.escape(id);
     connection.query(sql, function (err, result) {
       if (err) throw err;
-      const previousFirstName = JSON.parse(
-        JSON.stringify(result[0].first_name)
-      );
+      const previousFirstName = JSON.parse(JSON.stringify(result[0].first_name));
       const previousLastName = JSON.parse(JSON.stringify(result[0].last_name));
       const previousEmail = JSON.parse(JSON.stringify(result[0].email));
       const previousPassword = JSON.parse(JSON.stringify(result[0].password));
+      console.log(previousPassword);
+      console.log(previousEmail);
       // update details first
       const updatesql =
-        "UPDATE user SET first_name=?,last_name=?,email=?,password=?,role=? WHERE user_id =" +
+        "UPDATE user SET first_name=?,last_name=?,role=? WHERE user_id =" +
         connection.escape(id);
       connection.query(
         updatesql,
-        [firstName, lastName, email, password,role],
+        [firstName, lastName,role],
         function (err, result) {
           if (err) throw err;
           // console.log(result);
         }
       );
       // fill in details that body did not have
-      if (email == "") {
-        console.log("email");
-        const updateEmail =
-          "UPDATE user SET email=? WHERE user_id =" +
-          connection.escape(id);
-        connection.query(updateEmail, [previousEmail], function (err, result) {
-          if (err) throw err;
-          //  console.log(result);
-        });
-      }
       if (firstName == "") {
         console.log("first name");
         const updateFirstName =
@@ -166,20 +155,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
           }
         );
       }
-      if (password == "") {
-        console.log("password");
-        const updatesqlPassword =
-          "UPDATE user SET password=? WHERE user_id =" +
-          connection.escape(id);
-        connection.query(
-          updatesqlPassword,
-          [previousPassword],
-          function (err, result) {
-            if (err) throw err;
-            //  console.log(result);
-          }
-        );
-      }
+    
     });
 
     res.send("Updated details");
