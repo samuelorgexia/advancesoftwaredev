@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import axios from "axios"
+import Properties from "../../components/Properties/Properties";
 
-import propertyData from "../Properties/PropertyData.json"
+export default function PropertyManagement(props){
 
-export default function propertyManagement(props){
-   // const { property, ...rest} = props;
+    const property_id = props.match.params.id;
+    const [property, setProperty] = useState("");
+
+    const getProperty =() => {
+        fetch("/api/properties/get-property/"+property_id)
+        .then((response) => response.json())
+        .then((result) => {
+            setProperty(result[0]);
+            
+        })
+      }
+
+    useEffect(() => {
+        getProperty();
+    },[]);
 
     return  (
         <div>
@@ -12,7 +28,7 @@ export default function propertyManagement(props){
                     <label class="block text-gray-700 text-sm font-bold mt-2" for="address">
                         Address
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" /*value={property.address}*//>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text"/>
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mt-2" for="postcode">

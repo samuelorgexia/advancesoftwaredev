@@ -11,13 +11,14 @@ export default function UpdateUserAdmin(props) {
   const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("");
 
-  const [user, setUser] = useState("");
-
   const getUser =() => {
     fetch("/user/find-user/"+user_id)
     .then((response) => response.json())
     .then((result) => {
-        setUser(result);
+        const user = result[0];
+        setFirstName(user.first_name);
+        setLastName(user.last_name);
+        setRole(user.role);
     })
   }
 
@@ -62,7 +63,7 @@ export default function UpdateUserAdmin(props) {
               >
                 Name
               </label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>setFirstName({value: e.target.value})} ></input>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={firstName} onChange={(e)=>setFirstName(e.target.value)}></input>
             </div>
             <div class="mb-6">
               <label
@@ -70,7 +71,7 @@ export default function UpdateUserAdmin(props) {
               >
                 Last Name
               </label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>setLastName(e.target.value)}></input>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={lastName}  onChange={(e)=>setLastName(e.target.value)}></input>
             </div>
             <div class="mb-6">
               <label
@@ -78,10 +79,10 @@ export default function UpdateUserAdmin(props) {
               >
                 Role
               </label>
-              <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" selected={role}>
-                <option value="admin" onChange={(e)=>setRole(e.target.value)}>admin</option>
-                <option value="user" onChange={(e)=>setRole(e.target.value)}>user</option>
-                <option value="auctioneer" onChange={(e)=>setRole(e.target.value)}>auctioneer</option>
+              <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={role} onChange={(e)=>setRole(e.target.value)}>
+                <option value="admin">admin</option>
+                <option value="user">user</option>
+                <option value="agent">agent</option>
               </select>
             </div>
             <div class="flex items-center justify-between">
