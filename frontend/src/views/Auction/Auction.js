@@ -7,7 +7,7 @@ export default function Auction(props) {
         <div>
             {AuthService.isSignedIn() ?
                 <BidDisplay auctionId={props.match.params.id}/> :
-                <p>Please Login to view the aucton and make a bid!!!!!</p>
+                <p>Please Login to view the auction and make a bid.</p>
             }
         </div>
     )
