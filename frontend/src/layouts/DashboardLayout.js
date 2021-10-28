@@ -48,15 +48,13 @@ export default function DashboardLayout(props) {
 
   const userNavigation = [
     { name: "Settings", href: "/user-manage" },
-    { name: "Add Listing", href: "/add-property" },
-    { name: "Manage Users", href: "/user-admin" },
-    { name: "Manage Properties", href: "/property-admin" },
+
     {
       name: "Sign out",
       href: "#",
       onClick: logout,
     },
-    {name:"Manage Properties",href:"/"}
+    
   ];
 
   //meadowbank
@@ -64,6 +62,24 @@ export default function DashboardLayout(props) {
     lat: -33.8157836,
     lng: 151.0896983,
   };
+  const getAdminRoutes=(prop)=>{
+    console.log(props);
+    if(props.adminAuthorised==true){
+      userNavigation.push( {name:"Manage Properties",href:"/property-admin"});
+      userNavigation.push({name:"Manage Users",href:"/user-admin"});
+      userNavigation.push( { name: "Add Listing", href: "/add-property" },)
+    }
+    /*
+    if(props.userRole==false||props.login==false){
+      for(var i in userNavigation){
+        var route=userNavigation[i];
+        if(route.name=="Manage Users"){
+          userNavigation.splice(1,i);
+        }
+      }
+    }
+*/
+  }
 
   const getRoutes = (routes) => {
     return routes.map((route, index) => {
@@ -87,11 +103,12 @@ export default function DashboardLayout(props) {
             }}
             key={index}
           />
+
         );
       }
     });
   };
-
+  console.log(props);
   const getActiveRoute = (routes) => {
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].pathname === props.match.path) {
@@ -111,9 +128,10 @@ export default function DashboardLayout(props) {
 
     return route ? route.title || "Default Title" : "Default Title";
   };
-  console.log(props.login);
+  
   return (
     <div>
+      {getAdminRoutes(props)}
       <DashboardNav
         {...props}
         user={user}

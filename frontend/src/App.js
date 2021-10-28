@@ -46,11 +46,11 @@ function App(props) {
       },
     })
       .then((response) => {
-        console.log(response.data.login);
+        console.log(response.data.userRole);
         if (response.data.login) {
           setAuthenticated(true);
         }
-        if (response.data.userRole) {
+        if(response.data.userRole=="admin"){
           setAdminAuth(true);
         }
       })
@@ -79,6 +79,8 @@ function App(props) {
               logout={logout}
               authenticated={authenticated}
               setAuthenticated={setAuthenticated}
+              adminAuthorised={adminAuth}
+              setAdminAuthorised={setAdminAuth}
             />
           )}
         />
