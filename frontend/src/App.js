@@ -48,6 +48,7 @@ function App(props) {
       .then((response) => {
         console.log(response);
         if (response.data) {
+          console.log(response.data);
           setAuthenticated(true);
         }
       })

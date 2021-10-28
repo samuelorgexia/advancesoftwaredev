@@ -5,12 +5,12 @@ const bycrpt = require("bcrypt");
 const createJwt = require("./jwt/jwt-function");
 const jwtAuth = require("./jwt/jwt-auth");
 const UserVerify = require("./middleware/UserVerify");
-const BudgetVerify=require("./middleware/BudgetVerify");
+const BudgetVerify = require("./middleware/BudgetVerify");
 const salt = 10;
 
 router.post("/signup", UserVerify, async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
-  const budget="100000";
+  const budget = "100000";
   try {
     // hashed password
     const hashPassword = await bycrpt.hash(password, salt);
@@ -30,7 +30,7 @@ router.post("/signup", UserVerify, async (req, res) => {
           const sql = `INSERT INTO user (first_name,last_name,role,email,password,budget) VALUES (?,?,?,?,?,?)`;
           connection.query(
             sql,
-            [firstName, lastName, role, email, hashPassword,budget],
+            [firstName, lastName, role, email, hashPassword, budget],
             function (error, row) {
               if (error) throw error;
               const token = createJwt(row.insertId, role);
@@ -40,7 +40,7 @@ router.post("/signup", UserVerify, async (req, res) => {
           );
         });
       } else {
-   res.json({existingError:"Existing user with that email exist"});
+        res.json({ existingError: "Existing user with that email exist" });
       }
     });
   } catch (err) {
@@ -101,14 +101,16 @@ router.post("/get-user", jwtAuth, (req, res) => {
 // admin feature
 router.put("/update-user/:id", UserVerify, async (req, res) => {
   const { id } = req.params;
-  var { firstName, lastName,role } = req.body;
+  var { firstName, lastName, role } = req.body;
   console.log(req.body);
   try {
     // retrieve current details
     const sql = "SELECT * FROM user WHERE user_id =" + connection.escape(id);
     connection.query(sql, function (err, result) {
       if (err) throw err;
-      const previousFirstName = JSON.parse(JSON.stringify(result[0].first_name));
+      const previousFirstName = JSON.parse(
+        JSON.stringify(result[0].first_name)
+      );
       const previousLastName = JSON.parse(JSON.stringify(result[0].last_name));
       const previousEmail = JSON.parse(JSON.stringify(result[0].email));
       const previousPassword = JSON.parse(JSON.stringify(result[0].password));
@@ -120,7 +122,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
         connection.escape(id);
       connection.query(
         updatesql,
-        [firstName, lastName,role],
+        [firstName, lastName, role],
         function (err, result) {
           if (err) throw err;
           // console.log(result);
@@ -144,8 +146,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
       if (lastName == "") {
         console.log("last name");
         const updatesqlLastName =
-          "UPDATE user SET last_name=? WHERE user_id =" +
-          connection.escape(id);
+          "UPDATE user SET last_name=? WHERE user_id =" + connection.escape(id);
         connection.query(
           updatesqlLastName,
           [previousLastName],
@@ -155,7 +156,6 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
           }
         );
       }
-    
     });
 
     res.send("Updated details");
@@ -189,7 +189,7 @@ router.put("/update-user-themselves", UserVerify, jwtAuth, async (req, res) => {
         [firstName, lastName, email],
         function (err, result) {
           if (err) throw err;
-          
+
           res.send("Updated details");
         }
       );
@@ -262,23 +262,23 @@ router.put("/update-user-password", UserVerify, jwtAuth, async (req, res) => {
   }
 });
 // update user password for themselves when log in
-router.put("/update-budget",BudgetVerify ,jwtAuth, async (req, res) => {
+router.put("/update-budget", BudgetVerify, jwtAuth, async (req, res) => {
   const { budget } = req.body;
   console.log(budget);
   console.log(req.user.id);
   try {
     const updatesql =
-    "UPDATE user SET budget=? WHERE user_id =" +
-    connection.escape(req.user.id);
-  connection.query(updatesql, [budget], function (err, result) {
-    if (err) throw err;
-    res.send("updated budget");
-  });
+      "UPDATE user SET budget=? WHERE user_id =" +
+      connection.escape(req.user.id);
+    connection.query(updatesql, [budget], function (err, result) {
+      if (err) throw err;
+      res.send("updated budget");
+    });
   } catch (err) {
     console.log(err.message);
   }
 });
- // admin
+// admin
 router.delete("/delete-user/:id", (req, res) => {
   const { id } = req.params;
   try {
@@ -294,21 +294,19 @@ router.delete("/delete-user/:id", (req, res) => {
 router.post("/verify", jwtAuth, async (req, res) => {
   console.log(res.headersSent);
   try {
-    const userSql="SELECT role FROM user WHERE user_id="+connection.escape(req.user.id);
-   connection.query(userSql,function (err,result){
+    const userSql =
+      "SELECT role FROM user WHERE user_id=" + connection.escape(req.user.id);
+    connection.query(userSql, function (err, result) {
       if (err) throw err;
       console.log(result);
-    const role= JSON.parse(JSON.stringify(result[0].role));
+      const role = JSON.parse(JSON.stringify(result[0].role));
       res.json(true);
     });
-    
-  
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
   }
 });
-
 
 router.post("/login", UserVerify, async (req, res) => {
   const { email, password } = req.body;
@@ -331,7 +329,7 @@ router.post("/login", UserVerify, async (req, res) => {
             JSON.parse(JSON.stringify(result[0].password))
           )
         ) {
-          res.json({signInPassErr:"Password is incorrect"});
+          res.json({ signInPassErr: "Password is incorrect" });
         }
         // if user email and password matches
         if (
@@ -345,11 +343,11 @@ router.post("/login", UserVerify, async (req, res) => {
             JSON.parse(JSON.stringify(result[0].user_id)),
             JSON.parse(JSON.stringify(result[0].role))
           );
-          
+
           res.status(200).json({ token });
         }
       } else {
-        res.json({signInEmailErr:"Email does not match or exist"});
+        res.json({ signInEmailErr: "Email does not match or exist" });
       }
     });
   } catch (err) {}

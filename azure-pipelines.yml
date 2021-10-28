@@ -1,27 +1,29 @@
-
 trigger:
-- main
+  - main
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-- task: Npm@1
-- script: npm install -f
-  workingDirectory: backend/
-  displayName: 'npm install on backend'
+  - task: Npm@1
+  - script: npm install -f
+    workingDirectory: backend/
+    displayName: "npm install on backend"
 
-- script: npm run-script test-ci
-  workingDirectory: backend/
-  displayName: "Execute unit tests"
-  continueOnError: true
-  
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/junit.xml'
-    mergeTestResults: true
-    testRunTitle: 'Jest Unit Tests'
-    failTaskOnFailedTests: true
+  - task: NpmBuildFrontend@1
+  - script: npm run build
+    workingDirectory: frontend/
+    displayName: "npm build on frontend"
+
+  - script: npm run-script test-ci
+    workingDirectory: backend/
+    displayName: "Execute unit tests"
+    continueOnError: true
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: "JUnit"
+      testResultsFiles: "**/junit.xml"
+      mergeTestResults: true
+      testRunTitle: "Jest Unit Tests"
+      failTaskOnFailedTests: true
