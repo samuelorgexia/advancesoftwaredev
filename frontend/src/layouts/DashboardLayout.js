@@ -56,6 +56,7 @@ export default function DashboardLayout(props) {
       href: "#",
       onClick: logout,
     },
+    {name:"Manage Properties",href:"/"}
   ];
 
   //meadowbank
@@ -110,7 +111,7 @@ export default function DashboardLayout(props) {
 
     return route ? route.title || "Default Title" : "Default Title";
   };
-
+  console.log(props.login);
   return (
     <div>
       <DashboardNav

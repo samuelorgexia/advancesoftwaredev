@@ -28,7 +28,7 @@ function App(props) {
   };*/
 
   const [authenticated, setAuthenticated] = useState(false);
-
+  const[adminAuth,setAdminAuth]=useState(false);
   const logout = () => {
     console.log("works");
     setAuthenticated(false);
@@ -37,18 +37,25 @@ function App(props) {
     localStorage.removeItem("jwttoken");
   };
 
+
+
   const getUser = (token) => {
     axios({
       method: "post",
-      url: "/api/user/verify",
+      url: "/api/user/verify-role",
       headers: {
         jwt: token,
       },
     })
       .then((response) => {
-        console.log(response);
-        if (response.data) {
+        console.log(response.data.login);
+        if (response.data.login) {
           setAuthenticated(true);
+          
+        }
+        if(response.data.userRole){
+          setAdminAuth(true);
+        
         }
       })
       .catch(function (error) {
@@ -59,7 +66,7 @@ function App(props) {
 
   useEffect(() => {
     const token = localStorage.getItem("jwttoken");
-    if (token) getUser(token);
+    if (token)  getUser(token);
   }, []);
 
   return (
