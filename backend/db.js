@@ -7,6 +7,10 @@ const connection = mysql.createConnection({
   user: dbconfig.user,
   password: dbconfig.password,
   database: dbconfig.database,
+  port: 3306,
+  ssl: {
+    ca: fs.readFileSync("./config/BaltimoreCyberTrustRoot.crt.pem"),
+  },
 });
 
 const PropertyData = require("./core/PropertyData.json");
@@ -92,7 +96,6 @@ connection.connect((error) => {
     console.log("user Table created");
   });
 
-  
   connection.query(realestate, function (err, result) {
     if (err) throw err;
     console.log("auctioner table created");

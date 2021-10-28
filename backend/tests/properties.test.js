@@ -72,7 +72,7 @@ describe("retrieving properties", () => {
     expect(true).toBe(true);
   });
 
-  /*  beforeAll((done) => {
+  /*beforeAll((done) => {
     setTimeout(done, 4900); //hacky way to wait for connection until we
     //setup pool connections to mysql
   });
