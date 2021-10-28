@@ -1,14 +1,18 @@
 const request = require("supertest");
 const connection = require("../db");
-const index=require("../index");
+const index = require("../index");
 // login
 const testData = [
-  { firstName: "Michael", lastName: "leee", email: "testing1@gmail.com", password: "password123" },
+  {
+    firstName: "Michael",
+    lastName: "leee",
+    email: "testing1@gmail.com",
+    password: "password123",
+  },
   { firstName: "Samuel", lastName: "Li", email: "", password: "" },
   { firstName: "Samuel", lastName: "Li", email: "@gmail.com", password: "123" },
   { firstName: "", lastName: "", email: "", password: "" },
 ];
-
 
 /*
 describe("test login", () => {
