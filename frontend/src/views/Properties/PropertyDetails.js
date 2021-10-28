@@ -7,7 +7,8 @@ import { ReactComponent as BedIcon } from "../../assets/icons/bed.svg";
 import { ReactComponent as BathIcon } from "../../assets/icons/bath.svg";
 import { ReactComponent as CarIcon } from "../../assets/icons/car.svg";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:5000");
+import { AuthService } from "../../services/AuthService.js";
+const socket = io.connect("https://auctionify.azurewebsites.net/");
 
 export default function PropertyDetails({ id, property }) {
   const [username, setUsername] = useState("");
@@ -51,7 +52,7 @@ export default function PropertyDetails({ id, property }) {
 
       <br></br>
       <div class="bg-white shadow overflow-hidden sm:rounded-lg my-10">
-        <div class="px-4 py-5 sm:px-6 border-b border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <div class="py-5 sm:px-6 border-b border-gray-200 px-4 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-lg leading-6 font-medium text-gray-900">
             {property.address}
             <br></br>
@@ -265,37 +266,32 @@ export default function PropertyDetails({ id, property }) {
           </div>
         </div>
       </div>
-
-      {!showChat ? (
-        <div>
-          <h3>Join Chat</h3>
-
-          <input
-            class="rounded-lg bg-gray-500"
-            type="text"
-            placeholder="John..."
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-          />
-          <input
-            class="rounded-lg bg-gray-500"
-            type="text"
-            placeholder="Room ID.."
-            onChange={(event) => {
-              setRoom(event.target.value);
-            }}
-          />
-          <button
-            class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300"
-            onClick={joinRoom}
-          >
-            Join Chat
-          </button>
-        </div>
-      ) : (
-        <LiveChat socket={socket} username={username} room={room} />
-      )}
+      <div>
+        <h3 className="text-2xl">Join Chat</h3>
+        {AuthService.isSignedIn() ? !showChat ? (
+            <><input
+              class="rounded-lg bg-gray-500"
+              type="text"
+              placeholder="John..."
+              onChange={(event) => {
+                setUsername(event.target.value);
+              } } /><input
+                class="rounded-lg bg-gray-500"
+                type="text"
+                placeholder="Room ID.."
+                onChange={(event) => {
+                  setRoom(event.target.value);
+                } } /><button
+                  class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300"
+                  onClick={joinRoom}
+                >
+                Join Chat
+              </button></>
+          ) : (
+            <LiveChat socket={socket} username={username} room={room} />
+          ) : <p className="text-xl">Please login to access the Chat Room.</p>
+        }
+      </div>
     </>
   );
 }
