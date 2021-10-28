@@ -112,10 +112,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
         JSON.stringify(result[0].first_name)
       );
       const previousLastName = JSON.parse(JSON.stringify(result[0].last_name));
-      const previousEmail = JSON.parse(JSON.stringify(result[0].email));
-      const previousPassword = JSON.parse(JSON.stringify(result[0].password));
-      console.log(previousPassword);
-      console.log(previousEmail);
+
       // update details first
       const updatesql =
         "UPDATE user SET first_name=?,last_name=?,role=? WHERE user_id =" +
@@ -238,7 +235,7 @@ router.put("/update-user-themselves", UserVerify, jwtAuth, async (req, res) => {
   }
 });
 
-// update user password for themselves when log in
+// update user password for themselves when login
 router.put("/update-user-password", UserVerify, jwtAuth, async (req, res) => {
   var { password } = req.body;
   console.log(password.length);
@@ -278,7 +275,7 @@ router.put("/update-budget", BudgetVerify, jwtAuth, async (req, res) => {
     console.log(err.message);
   }
 });
-// admin
+// admin route to delete user
 router.delete("/delete-user/:id", (req, res) => {
   const { id } = req.params;
   try {
@@ -291,7 +288,8 @@ router.delete("/delete-user/:id", (req, res) => {
     console.log(err.message);
   }
 });
-router.post("/verify", jwtAuth, async (req, res) => {
+// verify user has login and their role
+router.post("/verify-role", jwtAuth, async (req, res) => {
   console.log(res.headersSent);
   try {
     const userSql =
@@ -300,7 +298,7 @@ router.post("/verify", jwtAuth, async (req, res) => {
       if (err) throw err;
       console.log(result);
       const role = JSON.parse(JSON.stringify(result[0].role));
-      res.json(true);
+      res.json({ login: true, userRole: role });
     });
   } catch (err) {
     console.error(err.message);
