@@ -5,9 +5,9 @@ import signup from "./views/users/signup";
 import userManagement from "./views/users/user-management";
 
 import addProperty from "./views/admin/addProperty";
-//import userAdmin from "./views/admin/userAdmin";
-import userAdmin from "./views/admin/UserAdmin";
-import propertyManagement from "./views/admin/propertyManagement";
+import PropertyAdmin from "./views/admin/PropertyAdmin";
+import UserAdmin from "./views/admin/UserAdmin";
+import propertyManagement from "./views/admin/PropertyManagement";
 import updateUserAdmin from "./views/admin/UpdateUserAdmin";
 
 import Property from "./views/Properties/Property";
@@ -67,14 +67,20 @@ const routes = [
     layout: "dashboardLayout",
   },
   {
+    title: "Property Admin",
+    pathname: "/property-admin",
+    component: PropertyAdmin,
+    layout: "dashboardLayout",
+  },
+  {
     title: "User Admin",
     pathname: "/user-admin",
-    component: userAdmin,
+    component: UserAdmin,
     layout: "dashboardLayout",
   },
   {
     title: "Property Management",
-    pathname: "/property-management",
+    pathname: "/property-management/:id",
     component: propertyManagement,
     layout: "dashboardLayout",
   },
