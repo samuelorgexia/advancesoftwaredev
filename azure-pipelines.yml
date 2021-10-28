@@ -10,7 +10,6 @@ steps:
     workingDirectory: backend/
     displayName: "npm install on backend"
 
-  - task: NpmBuildFrontend@1
   - script: npm run build
     workingDirectory: frontend/
     displayName: "npm build on frontend"
