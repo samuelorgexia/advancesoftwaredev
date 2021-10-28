@@ -51,7 +51,7 @@ export default function PropertyDetails({ id, property }) {
 
       <br></br>
       <div class="bg-white shadow overflow-hidden sm:rounded-lg my-10">
-        <div class="px-4 py-5 sm:px-6 border-b border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <div class="py-5 sm:px-6 border-b border-gray-200 px-4 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-lg leading-6 font-medium text-gray-900">
             {property.address}
             <br></br>
