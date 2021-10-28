@@ -3,8 +3,10 @@ const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 const http = require("http");
+const path = require("path");
+
 const server = http.createServer(app);
-const user =require('./user');
+const user = require("./user");
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
@@ -14,9 +16,9 @@ const io = new Server(server, {
 });
 
 const routes = require("./routes.js");
-app.use(express.static("../frontend/build"));
+
 const db = require("./db");
-const registerBidHandler = require('./handlers/bidHandler');
+const registerBidHandler = require("./handlers/bidHandler");
 
 // middleware
 const corsOptions = {
@@ -28,8 +30,16 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.static(path.join(__dirname, "build")));
+
 app.use("/api", routes);
-app.use("/user",user);
+app.use("/user", user);
+
+app.get("*", (req, res) => {
+  console.log(path.join(__dirname + "/build/index.html"));
+  res.sendFile(path.join(__dirname + "/build/index.html"));
+});
+
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 

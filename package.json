@@ -12,7 +12,8 @@
     "build": "npm run build --prefix frontend",
     "frontend-install": "cd frontend && npm install",
     "backend-install": "cd backend && npm install",
-    "install-all": "npm install && npm run frontend-install && npm run backend-install"
+    "install-all": "npm install && npm run frontend-install && npm run backend-install",
+    "prod": "cd backend && node ."
   },
   "repository": {
     "type": "git",
