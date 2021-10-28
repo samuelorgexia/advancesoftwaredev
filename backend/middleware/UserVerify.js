@@ -41,7 +41,7 @@ module.exports=function(req,res,next){
         .has().not().spaces();   
         
         if(!schema.validate(password)){
-            errorOut.push({passError:"Password must be 6 to 20 character with which contains a number and upper and lower case letters"});
+            errorOut.push({passError:"Password must be 6 to 20 character with which contains a number and lower case letters"});
         }
     }
 

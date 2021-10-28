@@ -40,7 +40,7 @@ router.post("/signup", UserVerify, async (req, res) => {
           );
         });
       } else {
-        res.json({ existingError: "Existing user with that email exist" });
+        res.json("Existing user with that email exist" );
       }
     });
   } catch (err) {
