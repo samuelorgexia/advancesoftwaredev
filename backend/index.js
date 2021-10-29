@@ -10,7 +10,7 @@ const user = require("./user");
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://auctionify.azurewebsites.net/",
     methods: ["GET", "POST"],
   },
 });
@@ -20,12 +20,24 @@ const routes = require("./routes.js");
 const db = require("./db");
 const registerBidHandler = require("./handlers/bidHandler");
 
-// middleware
+const whitelist = [
+  "https://auctionify.azurewebsites.net",
+  "http://localhost:5000",
+];
 const corsOptions = {
-  origin: "http://localhost:5000",
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log(`Origin - ${origin}`);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
+
+// middleware
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

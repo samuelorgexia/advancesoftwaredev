@@ -58,7 +58,7 @@ function Signup(props) {
             }
           
           }else{
-            setEmailError(response.data.exitingErrors);
+            setEmailError(response.data);
           }
         }
         

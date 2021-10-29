@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../../components/Buttons/Button";
 import { io } from "socket.io-client";
 import axios from "axios";
-const socket = io("localhost:5000");
+const socket = io("https://auctionify.azurewebsites.net/");
 
 export default function BidDisplay({ auctionId }) {
     const [userBid, setUserBid] = useState(0);
