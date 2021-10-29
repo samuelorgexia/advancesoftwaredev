@@ -70,10 +70,8 @@ router.get("/find-user/:id", (req, res) => {
     const sql = "SELECT * FROM user WHERE user_id =" + connection.escape(id);
     const find = connection.query(sql, function (err, result, fields) {
       if (err) throw error;
-
-      //if(result.length>0){
       res.send(result);
-      //  } res.send("does not exist");
+  
     });
   } catch (err) {
     console.log(err.message);
@@ -91,7 +89,7 @@ router.post("/get-user", jwtAuth, (req, res) => {
         return;
       }
       res.json(data);
-      // console.log(data);
+    
     });
   } catch (err) {
     console.error(err.message);
@@ -122,7 +120,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
         [firstName, lastName, role],
         function (err, result) {
           if (err) throw err;
-          // console.log(result);
+    
         }
       );
       // fill in details that body did not have
@@ -136,7 +134,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
           [previousFirstName],
           function (err, result) {
             if (err) throw err;
-            //  console.log(result);
+        
           }
         );
       }
@@ -149,7 +147,7 @@ router.put("/update-user/:id", UserVerify, async (req, res) => {
           [previousLastName],
           function (err, result) {
             if (err) throw err;
-            //  console.log(result);
+    
           }
         );
       }
